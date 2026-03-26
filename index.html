@@ -358,29 +358,65 @@ const comments = [
     {
         name: "Julia Morales",
         text: "Confiable, comprometido con su cliente, humano. Recomendable.",
-        time: "3 días"
+        comuna: "Providencia"
     },
     {
         name: "Andi MO",
         text: "Profesional excepcional. Su transparencia genera confianza desde el inicio.",
-        time: "6 días"
+        comuna: "Las Condes"
     },
     {
         name: "Genoveva Pacheco",
         text: "Muy cercano y comprometido con sus clientes. Lo recomiendo.",
-        time: "10 días"
+        comuna: "Ñuñoa"
     },
     {
         name: "Camila Jara",
         text: "Excelente servicio, siempre disponible para resolver dudas.",
-        time: "9 días"
+        comuna: "La Florida"
+    },
+    {
+        name: "Miryam Aguilera",
+        text: "Exelente, ha sido una experiencia buena. Su atención es rápida y se dedican 100% a los casos grandes.",
+        comuna: "Maipú"
+    },
+    {
+        name: "Marisol Martinez",
+        text: "Recomiendo el trabajo de los abogados 100%. Me sentí totalmente acompañada, llevaba años en un trámite que nadie logró solucionar. Llegué por recomendación y estoy muy agradecida por la gestión realizada en tan poco tiempo.",
+        comuna: "Puente Alto"
+    },
+    {
+        name: "Isbel Rubio",
+        text: "Excelente atención, me he sentido acompañada desde el primer momento. Todas mis dudas y consultas han sido respondidas de forma oportuna.",
+        comuna: "San Miguel"
+    },
+    {
+        name: "Jacques Barnier",
+        text: "Buen servicio, amigable, claro, responsable, eficiente.",
+        comuna: "Recoleta"
+    },
+    {
+        name: "Cyntia Manriquez",
+        text: "Excelente servicio. Muchas gracias 🙏.",
+        comuna: "Peñalolén"
     }
 ];
 
-let index = 0;
+let lastIndex = -1;
 const container = document.getElementById("carousel-content");
 
+function getRandomIndex() {
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * comments.length);
+    } while (newIndex === lastIndex && comments.length > 1);
+    
+    lastIndex = newIndex;
+    return newIndex;
+}
+
 function renderComment() {
+    const index = getRandomIndex();
     const c = comments[index];
 
     container.style.opacity = 0;
@@ -390,18 +426,15 @@ function renderComment() {
             <div class="comment-card">
                 <div class="comment-name">${c.name}</div>
                 <div class="comment-text">"${c.text}"</div>
-                <div class="comment-meta">Hace ${c.time}</div>
+                <div class="comment-meta">${c.comuna}</div>
             </div>
         `;
         container.style.opacity = 1;
     }, 300);
-
-    index = (index + 1) % comments.length;
 }
 
 // Inicial
 renderComment();
-
 
 setInterval(renderComment, 4000);
 </script>
