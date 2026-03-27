@@ -150,9 +150,8 @@
                 </div>
             </section>
 
-        
 
-            <section class="card about-us did-you-know" id="you_know_what">
+        <section class="card about-us did-you-know" id="you_know_what">
 
                 <h3>¿Sabías que...?</h3>
 
@@ -170,6 +169,52 @@
                     👉 ESCRIBENOS AHORA
                 </a>
             </section>
+
+            
+       <section class="card about-us why-us" id="why_us_div">
+        <h3>¿Por qué elegirnos?</h3>
+        <p class="why-us__subtitle">Te ayudamos a resolver herencias de forma rápida, clara y sin conflictos innecesarios.</p>
+
+        <div class="why-us__grid">
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">📜</span>
+                <div>
+                    <strong>Especialistas en herencias</strong>
+                    <span>Posesión efectiva, testamentos y partición de bienes.</span>
+                </div>
+            </div>
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">⚖️</span>
+                <div>
+                    <strong>Proceso claro y guiado</strong>
+                    <span>Te explicamos cada paso para que no pierdas tiempo ni dinero.</span>
+                </div>
+            </div>
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">🛡️</span>
+                <div>
+                    <strong>Protección de tu patrimonio</strong>
+                    <span>Defendemos tus derechos y evitamos problemas legales futuros.</span>
+                </div>
+            </div>
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">🚀</span>
+                <div>
+                    <strong>Gestión rápida</strong>
+                    <span>Agilizamos trámites para que recibas lo que te corresponde cuanto antes.</span>
+                </div>
+            </div>
+
+        </div>
+
+    <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer">
+        💬 Escríbenos ahora
+    </a>
+</section>
 
             <section class="card services" id="prices">
                 <div class="services__header">
@@ -243,6 +288,238 @@
     
             <!-- 🔥 Bootstrap (asegúrate de tener esto en tu proyecto) -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <section class="cases-section" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    
+    <h2>Casos Reales</h2>
+    <p class="text-center text-muted mb-4">
+        Hemos visto tu problema +100 veces
+    </p>
+
+    <div class="slider" style="display: flex; justify-content:center;">
+        <div class="slides">
+
+            <!-- SLIDE 1 -->
+            <div id="slide-1">
+                <div class="video-full">
+                    <video class="video" preload="metadata">
+                        <source src="./assets/case_1.mp4" type="video/mp4">
+                    </video>
+                    <button class="play-btn">▶</button>
+                </div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div id="slide-2">
+                <div class="video-full">
+                    <video class="video" preload="metadata">
+                        <source src="./assets/case_2.mov" type="video/mp4">
+                    </video>
+                    <button class="play-btn">▶</button>
+                </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div id="slide-3">
+                <div class="video-full">
+                    <video class="video" preload="metadata">
+                        <source src="./assets/case_3.mov" type="video/mp4">
+                    </video>
+                    <button class="play-btn">▶</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PAGINACIÓN -->
+    <div class="pagination" style="display: flex; justify-content: space-evenly; padding-top: 10px; width: 100%;">
+        <a href="#slide-1">⚪️</a>
+        <a href="#slide-2">⚪️</a>
+        <a href="#slide-3">⚪️</a>
+    </div>
+
+</section>
+
+<!-- ESTILOS -->
+<style>
+.video-full {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.video-full video {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: none;
+
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 40px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.play-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+</style>
+
+<!-- SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".video-full").forEach(container => {
+        const video = container.querySelector(".video");
+        const btn = container.querySelector(".play-btn");
+
+        btn.addEventListener("click", () => {
+
+            // pausa todos los otros videos
+            document.querySelectorAll(".video").forEach(v => {
+                if (v !== video) v.pause();
+            });
+
+            if (video.paused) {
+                video.play();
+                btn.style.display = "none";
+            } else {
+                video.pause();
+                btn.style.display = "block";
+            }
+        });
+
+        video.addEventListener("pause", () => {
+            btn.style.display = "block";
+        });
+
+        video.addEventListener("play", () => {
+            btn.style.display = "none";
+        });
+    });
+
+});
+</script>
+<style>
+.cases-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.cases-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.cases-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.carousel {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.carousel-item {
+    min-width: 100%;
+    padding: 10px;
+}
+
+.carousel-item iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+}
+
+.carousel-item p {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.nav:hover {
+    background: rgba(0,0,0,0.8);
+}
+</style>
+
+<script>
+const track = document.getElementById("carousel-track");
+const items = document.querySelectorAll(".carousel-item");
+
+let currentIndex = 0;
+
+function updateCarousel() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+document.querySelector(".next").addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % items.length;
+    updateCarousel();
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    updateCarousel();
+});
+
+// Swipe mobile (opcional 🔥)
+let startX = 0;
+
+track.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if (startX - endX > 50) {
+        currentIndex = (currentIndex + 1) % items.length;
+    } else if (endX - startX > 50) {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+    }
+
+    updateCarousel();
+});
+</script>
 
 <section class="law-process container py-5">
 
@@ -356,6 +633,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 const comments = [
     {
+        name: "Eduardo Molina",
+        text: "Excelente trabajo, gran profesionalismo y honestidad. Muy cercano y siempre dispuesto a ayudar. Precios accesibles a nosotros, sus  clientes.",
+        comuna: "Huechuraba"
+    },
+    {
+        name: "Juan García",
+        text: "Contrate los servicios legales de esta empresa y hasta el momento me ha resultado todo bien. Venía de un mal servicio en otro lado que me dejó abandonado.",
+        comuna: "Ñuñoa"
+    },
+    {
         name: "Julia Morales",
         text: "Confiable, comprometido con su cliente, humano. Recomendable.",
         comuna: "Providencia"
@@ -439,48 +726,6 @@ renderComment();
 setInterval(renderComment, 4000);
 </script>
             
-            <section class="card about-us why-us" id="why_us">
-                <h3>¿Por qué elegirnos?</h3>
-                <p class="why-us__subtitle">Cerramos tu caso con estrategia, claridad y acompañamiento real.</p>
-
-                <div class="why-us__grid">
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🎯</span>
-                        <div>
-                            <strong>Expertos en herencias</strong>
-                            <span>Especialistas en juicios de partición y conflictos hereditarios.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🧾</span>
-                        <div>
-                            <strong>Transparencia total</strong>
-                            <span>Precio claro y sin gastos ocultos.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">💬</span>
-                        <div>
-                            <strong>Cercanía 24/7</strong>
-                            <span>Atención de dudas y seguimiento por WhatsApp.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">📆</span>
-                        <div>
-                            <strong>Paga en cuotas</strong>
-                            <span>Opciones de pago pensadas para tu tranquilidad.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer">
-                    💬 Agenda tu asesoría ahora
-                </a>
-            </section>
         </div>
         <div id="divorcios-content" data-page="divorcios" style="display: none;">
             <section class="card hero">
@@ -522,19 +767,47 @@ setInterval(renderComment, 4000);
                     <div><b style="color: green">Tramitación de medidas provisionales:</b> 4 cuotas de $50.000</div>
                 </div>
             </section>
-            <section class="card about-us">
-                <div>
-                    <h3>¿Quiénes Somos?</h3>
+               <section class="card about-us why-us" id="why_us">
+                <h3>¿Por qué elegirnos?</h3>
+                <p class="why-us__subtitle">Cerramos tu caso con estrategia, claridad y acompañamiento real.</p>
 
-                    <p>
-                        En Defensa Ciudadana contamos con un equipo de abogados especialistas en divorcios, pensiones, y mediación familiar. Con más de 10 años de experiencia, ofrecemos representación jurídica seria, transparente y orientada a soluciones.
-                    </p>
+                <div class="why-us__grid">
+                    <div class="why-us__item">
+                        <span class="why-us__icon" aria-hidden="true">🎯</span>
+                        <div>
+                            <strong>Expertos en herencias</strong>
+                            <span>Especialistas en juicios de partición y conflictos hereditarios.</span>
+                        </div>
+                    </div>
 
-                    <p>
-                        Acompañamos a las personas en cada etapa del divorcio, priorizando el bienestar de los hijos y la protección patrimonial. Buscamos acuerdos cuando es posible y litigamos con firmeza cuando es necesario.
-                    </p>
-                    <img style="width: 100%;" src="./assets/df_lawyers.jpg" alt="Equipo">
+                    <div class="why-us__item">
+                        <span class="why-us__icon" aria-hidden="true">🧾</span>
+                        <div>
+                            <strong>Transparencia total</strong>
+                            <span>Precio claro y sin gastos ocultos.</span>
+                        </div>
+                    </div>
+
+                    <div class="why-us__item">
+                        <span class="why-us__icon" aria-hidden="true">💬</span>
+                        <div>
+                            <strong>Cercanía 24/7</strong>
+                            <span>Atención de dudas y seguimiento por WhatsApp.</span>
+                        </div>
+                    </div>
+
+                    <div class="why-us__item">
+                        <span class="why-us__icon" aria-hidden="true">📆</span>
+                        <div>
+                            <strong>Paga en cuotas</strong>
+                            <span>Opciones de pago pensadas para tu tranquilidad.</span>
+                        </div>
+                    </div>
                 </div>
+
+                <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer">
+                    💬 Agenda tu asesoría ahora
+                </a>
             </section>
             <section class="card about-us" id="costumers_feedback_div">
                 <div style="width: 97%; text-align: center; display: flex; flex-direction: column;">
@@ -544,48 +817,7 @@ setInterval(renderComment, 4000);
                     </div>
                 </div>
             </section>
-            <section class="card about-us why-us" id="why_us_div">
-                <h3>¿Por qué elegirnos?</h3>
-                <p class="why-us__subtitle">Un acompañamiento humano, con estrategia y foco en acuerdos justos.</p>
-
-                <div class="why-us__grid">
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🎯</span>
-                        <div>
-                            <strong>Especialistas en familia</strong>
-                            <span>Divorcios, pensiones, mediación y medidas provisionales.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🤝</span>
-                        <div>
-                            <strong>Contención y claridad</strong>
-                            <span>Te explicamos cada paso y te acompañamos en decisiones difíciles.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🛡️</span>
-                        <div>
-                            <strong>Protección de tu familia</strong>
-                            <span>Priorizamos hijos, acuerdos y resguardo patrimonial.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">📩</span>
-                        <div>
-                            <strong>Comunicación directa</strong>
-                            <span>Resolvemos dudas rápido y sin vueltas.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer">
-                    💬 Agenda tu asesoría ahora
-                </a>
-            </section>
+            
         </div>
     </div>
     <a 
