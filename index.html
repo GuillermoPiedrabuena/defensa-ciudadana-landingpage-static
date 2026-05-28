@@ -3,27 +3,19 @@
 <head>
     <!-- Google Tag Manager -->
     <script>
-        function loadScript(url) {
-            var script = document.createElement('script');
-            script.src = url;
-            script.async = true;
-            document.head.appendChild(script);
-        }
-
-        function loadThirdPartyScripts() {
-            loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-P993MRNH');
-            // Añade aquí otros scripts de terceros que necesites cargar
-        }
-
-        // Verifica si el usuario ha dado su consentimiento para las cookies
-        if (userHasConsentedToCookies()) {
-            loadThirdPartyScripts();
-        }
-
-        function userHasConsentedToCookies() {
-            // Implementa la lógica para verificar el consentimiento del usuario
-            return true; // Cambia esto según tu implementación
-        }
+        window.dataLayer = window.dataLayer || [];
+    </script>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0];
+            var j = d.createElement(s);
+            var dl = l !== 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P993MRNH');
     </script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
@@ -35,16 +27,6 @@
     <title>Herencias - Defensa Ciudadana | Asesoría Legal Experta</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16553991216">
-    </script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'AW-16553991216');
-    </script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -70,7 +52,9 @@
                 <a 
                     href="https://wa.me/56930509306" 
                     target="_blank" 
+                    rel="noopener noreferrer"
                     class="whatsapp-btn whatsapp-btn--hero"
+                    data-conversion-source="hero_whatsapp"
                 >
                     💬 Contáctanos
                 </a>
@@ -275,7 +259,9 @@
                 <a 
                     href="https://wa.me/56930509306" 
                     target="_blank" 
+                    rel="noopener noreferrer"
                     class="whatsapp-btn"
+                    data-conversion-source="sabias_que_whatsapp"
                 >
                     👉 ESCRIBENOS AHORA
                 </a>
@@ -322,7 +308,7 @@
 
         </div>
 
-    <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer">
+    <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" data-conversion-source="por_que_elegirnos_whatsapp">
         💬 Escríbenos ahora
     </a>
 </section>
@@ -352,7 +338,7 @@
                             <li><span class="service-card__li-icon" aria-hidden="true">✅</span><span>Acompañamiento y coordinación completa durante el proceso</span></li>
                         </ul>
 
-                        <a href="https://wa.me/56930509306" target="_blank" class="service-btn">Consultar por WhatsApp</a>
+                        <a href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" class="service-btn" data-conversion-source="servicio_particion_whatsapp">Consultar por WhatsApp</a>
                     </article>
 
                     <!-- Posesión Efectiva -->
@@ -371,7 +357,7 @@
                             <li><span class="service-card__li-icon" aria-hidden="true">📌</span><span>Tramitación completa (presentación + seguimiento)</span></li>
                         </ul>
 
-                        <a href="https://wa.me/56930509306" target="_blank" class="service-btn">Consultar por WhatsApp</a>
+                        <a href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" class="service-btn" data-conversion-source="servicio_posesion_whatsapp">Consultar por WhatsApp</a>
                     </article>
 
                     <!-- Corretaje -->
@@ -390,7 +376,7 @@
                             <li><span class="service-card__li-icon" aria-hidden="true">🤝</span><span>Pago al momento de la compraventa</span></li>
                         </ul>
 
-                        <a href="https://wa.me/56930509306" target="_blank" class="service-btn">Consultar por WhatsApp</a>
+                        <a href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" class="service-btn" data-conversion-source="servicio_corretaje_whatsapp">Consultar por WhatsApp</a>
                     </article>
                 </div>
             </section>
@@ -653,7 +639,7 @@ track.addEventListener("touchend", e => {
 
     <!-- CTA -->
     <div class="text-center mt-4">
-        <a href="https://wa.me/56930509306" target="_blank" class="btn btn-success">
+        <a href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" class="btn btn-success" data-conversion-source="como_trabajamos_whatsapp">
             💬 Agenda tu asesoría
         </a>
     </div>
@@ -809,7 +795,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
 
-                <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer">
+                <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" data-conversion-source="divorcios_whatsapp">
                     💬 Agenda tu asesoría ahora
                 </a>
             </section>
@@ -825,16 +811,19 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </div>
     <a 
-        href="https://wa.me/56930509306?text=Hola,%20quiero%20asesoría%20por%20una%20herencia" 
+        href="https://wa.me/56930509306" 
         target="_blank" 
+        rel="noopener noreferrer"
         class="whatsapp-float"
         aria-label="Contactar por WhatsApp"
+        data-conversion-source="float_whatsapp"
     >
         <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
     <footer>
         <p>© 2024 Defensa Ciudadana. Todos los derechos reservados.</p>
     </footer>
+    <script src="./js/whatsapp-cta.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <script>
@@ -865,6 +854,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.title = 'Herencias - Defensa Ciudadana | Asesoría Legal Experta';
                 var meta = document.querySelector('meta[name="description"]');
                 if(meta) meta.setAttribute('content','Obtén asesoría legal profesional en juicios de Herencias. Defensa Ciudadana te ayuda a proteger los derechos de tus hijos con transparencia y compromiso.');
+            }
+
+            if (typeof window.refreshWhatsAppLinks === 'function') {
+                window.refreshWhatsAppLinks();
             }
         })();
     </script>
