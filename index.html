@@ -119,8 +119,9 @@
                         <div class="team-card__body">
                             <div class="team-card__name">Guillermo Piedrabuena</div>
                             <div class="team-card__role">Abogado atención cliente</div>
+                            <div class="team-card__specialty">Magister en tributación sucesoria en Universidad Adolfo Ibáñez</div>
                             <div class="team-card__desc">Acompañamiento claro y cercano.</div>
-                            <a class="team-card__link" href="https://www.linkedin.com/in/gnpiedrabuena/" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+                            <a class="team-card__link" href="https://www.linkedin.com/in/gnpiedrabuena/" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de Guillermo en LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
                         </div>
                     </article>
 
@@ -131,8 +132,9 @@
                         <div class="team-card__body">
                             <div class="team-card__name">Ulises Ceroni</div>
                             <div class="team-card__role">Abogado tramitador</div>
+                            <div class="team-card__specialty">Diplomado en Derecho Sucesorio de la Pontificia Universidad Católica de Valparaíso</div>
                             <div class="team-card__desc">Gestión rápida y eficiente de herencias.</div>
-                            <a class="team-card__link" href="https://www.linkedin.com/in/ulises-ceroni-rivera/" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+                            <a class="team-card__link" href="https://www.linkedin.com/in/ulises-ceroni-rivera/" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de Ulises en LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
                         </div>
                     </article>
 
@@ -143,13 +145,122 @@
                         <div class="team-card__body">
                             <div class="team-card__name">Italo Puebla</div>
                             <div class="team-card__role">Abogado tramitador</div>
+                            <div class="team-card__specialty">Diplomado en Derecho Sucesorio de la Pontificia Universidad Católica de Valparaíso</div>
                             <div class="team-card__desc">Resolución ágil de conflictos hereditarios.</div>
-                            <a class="team-card__link" href="https://www.linkedin.com/in/italo-andres-puebla-diaz-7920a5a7/" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+                            <a class="team-card__link" href="https://www.linkedin.com/in/italo-andres-puebla-diaz-7920a5a7/" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de Italo en LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
                         </div>
                     </article>
                 </div>
             </section>
 
+            <section class="card about-us" id="customers_feedback">
+                <h3 style="text-align:center;">¿Qué Opinan Nuestros Clientes?</h3>
+
+                <div class="carousel">
+                    <div class="carousel-content" id="carousel-content">
+                        <!-- Comentario dinámico -->
+                    </div>
+                </div>
+            </section>
+
+            <script>
+            const comments = [
+            {
+                    name: "Paola Chantre",
+                    text: "Estoy conforme con su respectiva labor; con su disposición y estar pendiente de mi caso.",
+                    comuna: "Linares"
+                },
+                {
+                    name: "Eduardo Molina",
+                    text: "Excelente trabajo, gran profesionalismo y honestidad. Muy cercano y siempre dispuesto a ayudar. Precios accesibles a nosotros, sus  clientes.",
+                    comuna: "Huechuraba"
+                },
+                {
+                    name: "Juan García",
+                    text: "Contrate los servicios legales de esta empresa y hasta el momento me ha resultado todo bien. Venía de un mal servicio en otro lado que me dejó abandonado.",
+                    comuna: "Ñuñoa"
+                },
+                {
+                    name: "Julia Morales",
+                    text: "Confiable, comprometido con su cliente, humano. Recomendable.",
+                    comuna: "Providencia"
+                },
+                {
+                    name: "Andi MO",
+                    text: "Profesional excepcional. Su transparencia genera confianza desde el inicio.",
+                    comuna: "Las Condes"
+                },
+                {
+                    name: "Genoveva Pacheco",
+                    text: "Muy cercano y comprometido con sus clientes. Lo recomiendo.",
+                    comuna: "Ñuñoa"
+                },
+                {
+                    name: "Camila Jara",
+                    text: "Excelente servicio, siempre disponible para resolver dudas.",
+                    comuna: "La Florida"
+                },
+                {
+                    name: "Miryam Aguilera",
+                    text: "Exelente, ha sido una experiencia buena. Su atención es rápida y se dedican 100% a los casos grandes.",
+                    comuna: "Maipú"
+                },
+                {
+                    name: "Marisol Martinez",
+                    text: "Recomiendo el trabajo de los abogados 100%. Me sentí totalmente acompañada, llevaba años en un trámite que nadie logró solucionar. Llegué por recomendación y estoy muy agradecida por la gestión realizada en tan poco tiempo.",
+                    comuna: "Puente Alto"
+                },
+                {
+                    name: "Isbel Rubio",
+                    text: "Excelente atención, me he sentido acompañada desde el primer momento. Todas mis dudas y consultas han sido respondidas de forma oportuna.",
+                    comuna: "San Miguel"
+                },
+                {
+                    name: "Jacques Barnier",
+                    text: "Buen servicio, amigable, claro, responsable, eficiente.",
+                    comuna: "Recoleta"
+                },
+                {
+                    name: "Cyntia Manriquez",
+                    text: "Excelente servicio. Muchas gracias 🙏.",
+                    comuna: "Peñalolén"
+                }
+            ];
+
+            let lastIndex = -1;
+            const container = document.getElementById("carousel-content");
+
+            function getRandomIndex() {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * comments.length);
+                } while (newIndex === lastIndex && comments.length > 1);
+                
+                lastIndex = newIndex;
+                return newIndex;
+            }
+
+            function renderComment() {
+                const index = getRandomIndex();
+                const c = comments[index];
+
+                container.style.opacity = 0;
+
+                setTimeout(() => {
+                    container.innerHTML = `
+                        <div class="comment-card">
+                            <div class="comment-name">${c.name}</div>
+                            <div class="comment-text">"${c.text}"</div>
+                            <div class="comment-meta">${c.comuna}</div>
+                        </div>
+                    `;
+                    container.style.opacity = 1;
+                }, 300);
+            }
+
+            renderComment();
+            setInterval(renderComment, 4000);
+            </script>
 
         <section class="card about-us did-you-know" id="you_know_what">
 
@@ -617,113 +728,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSteps("particion");
 
 });
-</script>
-            <section class="card about-us" id="customers_feedback">
-    <h3 style="text-align:center;">¿Qué Opinan Nuestros Clientes?</h3>
-
-    <div class="carousel">
-        <div class="carousel-content" id="carousel-content">
-            <!-- Comentario dinámico -->
-        </div>
-    </div>
-</section>
-
-    
-
-<script>
-const comments = [
-    {
-        name: "Eduardo Molina",
-        text: "Excelente trabajo, gran profesionalismo y honestidad. Muy cercano y siempre dispuesto a ayudar. Precios accesibles a nosotros, sus  clientes.",
-        comuna: "Huechuraba"
-    },
-    {
-        name: "Juan García",
-        text: "Contrate los servicios legales de esta empresa y hasta el momento me ha resultado todo bien. Venía de un mal servicio en otro lado que me dejó abandonado.",
-        comuna: "Ñuñoa"
-    },
-    {
-        name: "Julia Morales",
-        text: "Confiable, comprometido con su cliente, humano. Recomendable.",
-        comuna: "Providencia"
-    },
-    {
-        name: "Andi MO",
-        text: "Profesional excepcional. Su transparencia genera confianza desde el inicio.",
-        comuna: "Las Condes"
-    },
-    {
-        name: "Genoveva Pacheco",
-        text: "Muy cercano y comprometido con sus clientes. Lo recomiendo.",
-        comuna: "Ñuñoa"
-    },
-    {
-        name: "Camila Jara",
-        text: "Excelente servicio, siempre disponible para resolver dudas.",
-        comuna: "La Florida"
-    },
-    {
-        name: "Miryam Aguilera",
-        text: "Exelente, ha sido una experiencia buena. Su atención es rápida y se dedican 100% a los casos grandes.",
-        comuna: "Maipú"
-    },
-    {
-        name: "Marisol Martinez",
-        text: "Recomiendo el trabajo de los abogados 100%. Me sentí totalmente acompañada, llevaba años en un trámite que nadie logró solucionar. Llegué por recomendación y estoy muy agradecida por la gestión realizada en tan poco tiempo.",
-        comuna: "Puente Alto"
-    },
-    {
-        name: "Isbel Rubio",
-        text: "Excelente atención, me he sentido acompañada desde el primer momento. Todas mis dudas y consultas han sido respondidas de forma oportuna.",
-        comuna: "San Miguel"
-    },
-    {
-        name: "Jacques Barnier",
-        text: "Buen servicio, amigable, claro, responsable, eficiente.",
-        comuna: "Recoleta"
-    },
-    {
-        name: "Cyntia Manriquez",
-        text: "Excelente servicio. Muchas gracias 🙏.",
-        comuna: "Peñalolén"
-    }
-];
-
-let lastIndex = -1;
-const container = document.getElementById("carousel-content");
-
-function getRandomIndex() {
-    let newIndex;
-    do {
-        newIndex = Math.floor(Math.random() * comments.length);
-    } while (newIndex === lastIndex && comments.length > 1);
-    
-    lastIndex = newIndex;
-    return newIndex;
-}
-
-function renderComment() {
-    const index = getRandomIndex();
-    const c = comments[index];
-
-    container.style.opacity = 0;
-
-    setTimeout(() => {
-        container.innerHTML = `
-            <div class="comment-card">
-                <div class="comment-name">${c.name}</div>
-                <div class="comment-text">"${c.text}"</div>
-                <div class="comment-meta">${c.comuna}</div>
-            </div>
-        `;
-        container.style.opacity = 1;
-    }, 300);
-}
-
-// Inicial
-renderComment();
-
-setInterval(renderComment, 4000);
 </script>
             
         </div>

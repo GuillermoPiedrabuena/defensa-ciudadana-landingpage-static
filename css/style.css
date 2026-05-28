@@ -54,12 +54,14 @@ header {
     padding: 10px 20px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
-    height: 8vh;
+    min-height: calc(min(180px, 12vw) + 20px);
+    height: auto;
 }
 
 .video-full {
@@ -667,6 +669,13 @@ img {
     font-size: 0.95rem;
 }
 
+.team-card__specialty {
+    color: #374151;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
 .team-card__desc {
     color: #1f2937;
     font-size: 0.98rem;
@@ -678,18 +687,35 @@ img {
     align-items: center;
     gap: 8px;
     width: fit-content;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background: rgba(25, 135, 84, 0.10);
-    color: rgb(25, 135, 84);
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #0a66c2;
+    color: #ffffff;
     text-decoration: none;
-    font-weight: 900;
-    transition: background-color 0.15s ease, transform 0.15s ease;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+    border: 1px solid #0a66c2;
+    box-shadow: 0 2px 6px rgba(10, 102, 194, 0.25);
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.team-card__link .bi-linkedin {
+    font-size: 1.15rem;
+    line-height: 1;
 }
 
 .team-card__link:hover {
-    background: rgba(25, 135, 84, 0.16);
+    background: #004182;
+    border-color: #004182;
+    color: #ffffff;
     transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(10, 102, 194, 0.35);
+}
+
+.team-card__link:focus-visible {
+    outline: 2px solid #0a66c2;
+    outline-offset: 2px;
 }
 
 @media (max-width: 980px) {
