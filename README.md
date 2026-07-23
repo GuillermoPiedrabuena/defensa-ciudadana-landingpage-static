@@ -1,5 +1,10 @@
 # Defensa Ciudadana — Landing
 
+Sitio estático desplegado en **[Render](https://render.com)**.
+
+- **Producción:** `https://www.defensa-ciudadana.cl`
+- **Repositorio:** conectado a Render para despliegue automático al hacer push a `main`.
+
 ## Google Tag Manager — conversión WhatsApp
 
 El sitio envía un evento al hacer clic en cualquier botón de WhatsApp:
@@ -31,7 +36,6 @@ dataLayer.push({ event: 'whatsapp_click', conversion_source: '...' });
 
 - `defensa-ciudadana.cl`
 - `www.defensa-ciudadana.cl`
-- `defensa-ciudadana-landingpage-static.fly.dev` (opcional, pruebas)
 
 ## WhatsApp — mensaje desde la web
 
