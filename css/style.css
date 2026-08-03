@@ -615,7 +615,7 @@ img {
 
 .team-grid {
     display: grid;
-    grid-template-columns: minmax(0, 360px);
+    grid-template-columns: repeat(2, minmax(0, 360px));
     justify-content: center;
     gap: 16px;
     margin-top: 18px;
