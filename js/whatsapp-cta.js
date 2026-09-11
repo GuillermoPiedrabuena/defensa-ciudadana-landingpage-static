@@ -18,7 +18,6 @@
         servicio_posesion_whatsapp: 'Consulta por Posesión Efectiva.',
         servicio_corretaje_whatsapp: 'Consulta por Corretaje de Propiedad.',
         como_trabajamos_whatsapp: 'Vi «Cómo trabajamos».',
-        divorcios_whatsapp: 'Vi la página de divorcios.',
         float_whatsapp: 'Usé el botón flotante de WhatsApp.'
     };
 
@@ -29,14 +28,6 @@
             href.indexOf('api.whatsapp.com') !== -1 ||
             href.indexOf('web.whatsapp.com') !== -1
         );
-    }
-
-    function getActiveLanding() {
-        var divorcios = document.getElementById('divorcios-content');
-        if (divorcios && divorcios.style.display !== 'none') {
-            return 'divorcios';
-        }
-        return 'herencias';
     }
 
     function getConversionSource(link) {
@@ -54,8 +45,6 @@
 
         if (section) {
             parts.push(section);
-        } else if (getActiveLanding() === 'divorcios') {
-            parts.push('Interés en divorcios.');
         } else {
             parts.push('Interés en herencias.');
         }
@@ -80,7 +69,7 @@
             click_url: link.href || '',
             page_location: window.location.href,
             page_path: window.location.pathname,
-            landing: getActiveLanding()
+            landing: 'herencias'
         });
     }
 

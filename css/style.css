@@ -185,6 +185,7 @@ a {text-decoration: none!important;}
     font-size: 1.8em;
     margin: 20px 0;
     color: #fff;
+    text-align: center;
 }
 
 .cta-button {
@@ -1161,5 +1162,525 @@ footer a {
 
 footer a:hover {
     color: #000;
+}
+
+/* =========================
+   Simulador de costos
+   ========================= */
+.cost-simulator-banner {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(40, 157, 40, 0.18);
+    background:
+        radial-gradient(circle at top right, rgba(40, 157, 40, 0.16), transparent 46%),
+        linear-gradient(135deg, #f3faf4 0%, #ffffff 55%, #eef8ef 100%);
+    text-align: center;
+}
+
+.cost-simulator-banner::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -60px;
+    bottom: -80px;
+    border-radius: 50%;
+    background: rgba(40, 157, 40, 0.1);
+    pointer-events: none;
+}
+
+.cost-simulator-banner__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.cost-simulator-banner__eyebrow {
+    margin: 0;
+    padding: 0.28rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(20, 115, 71, 0.1);
+    color: var(--brand-green-dark);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.cost-simulator-banner h3 {
+    margin: 0;
+}
+
+.cost-simulator-banner__text {
+    margin: 0 0 0.45rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.cost-simulator-launch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: 0.35rem;
+    padding: 0.95rem 1.25rem 0.95rem 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #34b84a 0%, var(--brand-green) 45%, var(--brand-green-dark) 100%);
+    color: #fff;
+    box-shadow:
+        0 14px 30px rgba(20, 115, 71, 0.28),
+        0 0 0 0 rgba(40, 157, 40, 0.45);
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    animation: cost-simulator-pulse 2.4s ease-out infinite;
+}
+
+.cost-simulator-launch__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 1.35rem;
+    flex-shrink: 0;
+}
+
+.cost-simulator-launch__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+    text-align: left;
+}
+
+.cost-simulator-launch__copy strong {
+    font-size: 1.12rem;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.cost-simulator-launch__copy small {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.82rem;
+}
+
+.cost-simulator-launch__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: transform 0.18s ease;
+}
+
+.cost-simulator-launch:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.05);
+    box-shadow:
+        0 18px 34px rgba(20, 115, 71, 0.34),
+        0 0 0 0 rgba(40, 157, 40, 0.45);
+}
+
+.cost-simulator-launch:hover .cost-simulator-launch__arrow {
+    transform: translateX(3px);
+}
+
+.cost-simulator-launch:focus-visible {
+    outline: 3px solid rgba(40, 157, 40, 0.45);
+    outline-offset: 3px;
+}
+
+@keyframes cost-simulator-pulse {
+    0% {
+        box-shadow:
+            0 14px 30px rgba(20, 115, 71, 0.28),
+            0 0 0 0 rgba(40, 157, 40, 0.4);
+    }
+    70% {
+        box-shadow:
+            0 14px 30px rgba(20, 115, 71, 0.28),
+            0 0 0 16px rgba(40, 157, 40, 0);
+    }
+    100% {
+        box-shadow:
+            0 14px 30px rgba(20, 115, 71, 0.28),
+            0 0 0 0 rgba(40, 157, 40, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cost-simulator-launch {
+        animation: none;
+    }
+}
+
+.cost-simulator-modal .modal-dialog {
+    max-width: min(980px, calc(100vw - 1.5rem));
+}
+
+.cost-simulator-shell {
+    border: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(16, 68, 40, 0.18);
+    background:
+        radial-gradient(circle at top right, rgba(40, 157, 40, 0.12), transparent 42%),
+        linear-gradient(180deg, #f7fbf7 0%, #ffffff 28%, #ffffff 100%);
+}
+
+.cost-simulator-header {
+    border-bottom: 1px solid rgba(40, 157, 40, 0.12);
+    padding: 1.25rem 1.5rem 1rem;
+    background: transparent;
+}
+
+.cost-simulator-eyebrow {
+    margin: 0 0 0.2rem;
+    color: var(--brand-green-dark);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.cost-simulator-header .modal-title {
+    margin: 0;
+    color: #143528;
+    font-size: 1.55rem;
+    font-weight: 800;
+}
+
+.cost-simulator-body {
+    padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.cost-simulator-lead {
+    margin: 0 0 1.15rem;
+    color: var(--text-muted);
+    text-align: left;
+    max-width: 42rem;
+}
+
+.cost-simulator-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.35rem;
+}
+
+.cost-simulator-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border-radius: 999px !important;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.cost-simulator-tab.active,
+.cost-simulator-tab.btn-success {
+    background: linear-gradient(135deg, var(--brand-green), var(--brand-green-dark));
+    border-color: transparent;
+    box-shadow: 0 10px 22px rgba(20, 115, 71, 0.22);
+}
+
+.cost-simulator-tab.btn-outline-success {
+    background: #fff;
+    border-color: rgba(40, 157, 40, 0.35);
+    color: var(--brand-green-dark);
+}
+
+.cost-simulator-tab:hover {
+    transform: translateY(-1px);
+}
+
+.cost-simulator-tab__icon {
+    font-size: 1.05rem;
+    line-height: 1;
+}
+
+.cost-simulator-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.15rem;
+}
+
+.cost-simulator-field--wide {
+    grid-column: 1 / -1;
+}
+
+.cost-simulator-label {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.cost-simulator-hint {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+}
+
+.cost-simulator-input,
+.cost-simulator-money .form-control,
+.cost-simulator-money .input-group-text,
+.cost-simulator-field .form-select {
+    border-radius: 14px;
+    border-color: rgba(20, 53, 40, 0.12);
+    min-height: 48px;
+    background: #fff;
+}
+
+.cost-simulator-money .input-group-text {
+    border-right: 0;
+    background: #eef7ef;
+    color: var(--brand-green-dark);
+    font-weight: 700;
+}
+
+.cost-simulator-money .form-control {
+    border-left: 0;
+}
+
+.cost-simulator-input:focus,
+.cost-simulator-field .form-select:focus,
+.cost-simulator-money .form-control:focus {
+    border-color: rgba(40, 157, 40, 0.55);
+    box-shadow: 0 0 0 0.2rem rgba(40, 157, 40, 0.15);
+}
+
+.cost-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.cost-choice {
+    margin: 0;
+    cursor: pointer;
+}
+
+.cost-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cost-choice__card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 92px;
+    padding: 1rem 1.05rem;
+    border-radius: 18px;
+    border: 1.5px solid rgba(20, 53, 40, 0.12);
+    background: #fff;
+    box-shadow: 0 8px 18px rgba(16, 68, 40, 0.04);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.cost-choice__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: #eef7ef;
+    font-size: 1.25rem;
+}
+
+.cost-choice__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.cost-choice__text strong {
+    color: #143528;
+    font-size: 1.02rem;
+}
+
+.cost-choice__text small {
+    color: var(--text-muted);
+    line-height: 1.35;
+}
+
+.cost-choice__check {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 2px solid rgba(20, 53, 40, 0.2);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.cost-choice__check::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: 999px;
+    background: transparent;
+    transition: background 0.15s ease;
+}
+
+.cost-choice input:checked + .cost-choice__card {
+    border-color: var(--brand-green);
+    background: linear-gradient(180deg, rgba(40, 157, 40, 0.08), rgba(255, 255, 255, 0.95));
+    box-shadow: 0 12px 28px rgba(20, 115, 71, 0.14);
+    transform: translateY(-1px);
+}
+
+.cost-choice input:checked + .cost-choice__card .cost-choice__check {
+    border-color: var(--brand-green);
+}
+
+.cost-choice input:checked + .cost-choice__card .cost-choice__check::after {
+    background: var(--brand-green);
+}
+
+.cost-choice input:focus-visible + .cost-choice__card {
+    outline: 2px solid rgba(40, 157, 40, 0.45);
+    outline-offset: 2px;
+}
+
+.cost-choice:hover .cost-choice__card {
+    border-color: rgba(40, 157, 40, 0.4);
+}
+
+.cost-result {
+    margin-top: 1.35rem;
+    padding: 1.15rem 1.2rem 1.05rem;
+    border-radius: 20px;
+    border: 1px solid rgba(40, 157, 40, 0.14);
+    background:
+        linear-gradient(180deg, rgba(40, 157, 40, 0.08), rgba(255, 255, 255, 0.92));
+}
+
+.cost-result__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.cost-result__head h5 {
+    margin: 0;
+    color: #143528;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.cost-result__head span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(20, 115, 71, 0.1);
+    color: var(--brand-green-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cost-result__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px dashed rgba(20, 53, 40, 0.1);
+    color: #334155;
+}
+
+.cost-result__row strong {
+    color: #143528;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.cost-result__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.85rem;
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    background: #143528;
+    color: #fff;
+}
+
+.cost-result__total span {
+    font-weight: 700;
+}
+
+.cost-result__total strong {
+    color: #9dffb0;
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    text-align: right;
+}
+
+.cost-result__note {
+    margin: 0.85rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    text-align: left;
+}
+
+.cost-simulator-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.2rem;
+}
+
+.cost-simulator-whatsapp {
+    border-radius: 999px;
+    padding: 0.8rem 1.35rem;
+    font-weight: 700;
+    box-shadow: 0 10px 22px rgba(20, 115, 71, 0.2);
+}
+
+@media (max-width: 768px) {
+    .cost-simulator-tabs,
+    .cost-simulator-grid,
+    .cost-choice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cost-simulator-header,
+    .cost-simulator-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .cost-result__total {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cost-result__total strong {
+        text-align: left;
+    }
 }
 

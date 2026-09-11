@@ -5,6 +5,7 @@
     <script>
         window.dataLayer = window.dataLayer || [];
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -41,8 +42,7 @@
 
     <!-- Contenedor Principal -->
     <div class="">
-        <!-- Contenido específico por servicio: 'herencias' (por defecto) y 'divorcios' -->
-        <div id="herencias-content" data-page="herencias">
+        <div id="herencias-content">
             <!-- Sección Hero -->
             <section class="hero">
                 <h2>¡Vende esa casa que recibiste en herencia!</h2>
@@ -233,6 +233,350 @@
             setInterval(renderComment, 4000);
             </script>
 
+<!-- =========================================================
+     SECCIÓN ¿CUÁNTO ME COSTARÁ?
+========================================================= -->
+
+<section class="card about-us cost-simulator-banner" id="cost-simulator-cta">
+    <div class="cost-simulator-banner__content">
+        <p class="cost-simulator-banner__eyebrow">Calculadora rápida</p>
+        <h3>¿Cuánto me costará?</h3>
+        <p class="cost-simulator-banner__text">
+            Calcula de forma aproximada los costos de tu proceso,
+            incluyendo nuestros honorarios y los principales gastos externos.
+        </p>
+        <button
+            type="button"
+            class="cost-simulator-launch"
+            data-bs-toggle="modal"
+            data-bs-target="#costSimulatorModal"
+        >
+            <span class="cost-simulator-launch__icon" aria-hidden="true">💰</span>
+            <span class="cost-simulator-launch__copy">
+                <strong>Simular costo ahora</strong>
+                <small>Resultado en segundos</small>
+            </span>
+            <span class="cost-simulator-launch__arrow" aria-hidden="true">→</span>
+        </button>
+    </div>
+</section>
+
+
+<!-- =========================================================
+     MODAL SIMULADOR
+========================================================= -->
+
+<div
+    class="modal fade cost-simulator-modal"
+    id="costSimulatorModal"
+    tabindex="-1"
+    aria-labelledby="costSimulatorModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content cost-simulator-shell">
+
+            <div class="modal-header cost-simulator-header">
+                <div>
+                    <p class="cost-simulator-eyebrow">Estimación rápida</p>
+                    <h5 class="modal-title" id="costSimulatorModalLabel">
+                        Simulador de costos
+                    </h5>
+                </div>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar"
+                ></button>
+            </div>
+
+            <div class="modal-body cost-simulator-body">
+                <p class="cost-simulator-lead">
+                    Calcula de manera aproximada cuánto podrías pagar,
+                    considerando honorarios y costos externos.
+                </p>
+
+                <div class="cost-simulator-tabs" role="group" aria-label="Tipo de servicio">
+                    <button
+                        type="button"
+                        class="btn btn-success active cost-simulator-tab"
+                        data-type="particion"
+                    >
+                        <span class="cost-simulator-tab__icon" aria-hidden="true">⚖️</span>
+                        Juicio de Partición
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-outline-success cost-simulator-tab"
+                        data-type="posesion"
+                    >
+                        <span class="cost-simulator-tab__icon" aria-hidden="true">📄</span>
+                        Posesión Efectiva
+                    </button>
+                </div>
+
+                <!-- PARTICIÓN -->
+                <div id="cost-simulator-particion" class="cost-simulator-panel">
+                    <div class="cost-simulator-grid">
+                        <div class="cost-simulator-field cost-simulator-field--wide">
+                            <span class="cost-simulator-label">¿Dónde están los demandados?</span>
+                            <div class="cost-choice-grid" role="radiogroup" aria-label="Ubicación de los demandados">
+                                <label class="cost-choice" for="particion-santiago">
+                                    <input
+                                        type="radio"
+                                        name="particion-ubicacion"
+                                        id="particion-santiago"
+                                        value="santiago"
+                                        checked
+                                    >
+                                    <span class="cost-choice__card">
+                                        <span class="cost-choice__icon" aria-hidden="true">🏙️</span>
+                                        <span class="cost-choice__text">
+                                            <strong>Santiago</strong>
+                                            <small>Receptor ~ $70.000 / notificación</small>
+                                        </span>
+                                        <span class="cost-choice__check" aria-hidden="true"></span>
+                                    </span>
+                                </label>
+
+                                <label class="cost-choice" for="particion-region">
+                                    <input
+                                        type="radio"
+                                        name="particion-ubicacion"
+                                        id="particion-region"
+                                        value="region"
+                                    >
+                                    <span class="cost-choice__card">
+                                        <span class="cost-choice__icon" aria-hidden="true">🌄</span>
+                                        <span class="cost-choice__text">
+                                            <strong>Regiones</strong>
+                                            <small>Receptor ~ $40.000 / notificación</small>
+                                        </span>
+                                        <span class="cost-choice__check" aria-hidden="true"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="cost-simulator-field">
+                            <label class="cost-simulator-label" for="simulador-particion-demandados">
+                                Número de demandados
+                            </label>
+                            <input
+                                type="number"
+                                id="simulador-particion-demandados"
+                                class="form-control cost-simulator-input"
+                                min="1"
+                                max="100"
+                                value="3"
+                            >
+                            <small class="cost-simulator-hint">
+                                Se estiman 3 notificaciones por demandado.
+                            </small>
+                        </div>
+
+                        <div class="cost-simulator-field">
+                            <label class="cost-simulator-label" for="simulador-particion-valor">
+                                Valor comercial de la propiedad
+                            </label>
+                            <div class="input-group cost-simulator-money">
+                                <span class="input-group-text">$</span>
+                                <input
+                                    type="text"
+                                    inputmode="numeric"
+                                    id="simulador-particion-valor"
+                                    class="form-control cost-simulator-input"
+                                    value="100.000.000"
+                                    autocomplete="off"
+                                >
+                            </div>
+                            <small class="cost-simulator-hint">
+                                Usa un valor aproximado de mercado.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="cost-result">
+                        <div class="cost-result__head">
+                            <h5>Costo estimado</h5>
+                            <span>Referencial</span>
+                        </div>
+
+                        <div class="cost-result__row">
+                            <span>👨‍⚖️ Honorarios abogado</span>
+                            <strong id="simulador-particion-abogado">$1.080.000</strong>
+                        </div>
+                        <div class="cost-result__row">
+                            <span>📬 Notificaciones de receptores</span>
+                            <strong id="simulador-particion-receptores">$630.000</strong>
+                        </div>
+                        <div class="cost-result__row">
+                            <span>⚖️ Juez partidor</span>
+                            <strong id="simulador-particion-juez">$7.000.000 – $15.000.000</strong>
+                        </div>
+
+                        <div class="cost-result__total">
+                            <span>Total estimado</span>
+                            <strong id="simulador-particion-total">
+                                $8.710.000 – $16.710.000
+                            </strong>
+                        </div>
+
+                        <p class="cost-result__note">
+                            * Estimación referencial. El juez partidor suele cobrar
+                            entre 7% y 15% del valor comercial de la propiedad.
+                        </p>
+                    </div>
+
+                    <div class="cost-simulator-cta">
+                        <a
+                            href="https://wa.me/56930509306"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-success cost-simulator-whatsapp"
+                            data-conversion-source="simulador_particion_whatsapp"
+                        >
+                            💬 Quiero revisar mi caso
+                        </a>
+                    </div>
+                </div>
+
+                <!-- POSESIÓN EFECTIVA -->
+                <div
+                    id="cost-simulator-posesion"
+                    class="cost-simulator-panel"
+                    style="display:none;"
+                >
+                    <div class="cost-simulator-grid">
+                        <div class="cost-simulator-field">
+                            <label class="cost-simulator-label" for="simulador-posesion-masa">
+                                Valor fiscal de la herencia
+                            </label>
+                            <div class="input-group cost-simulator-money">
+                                <span class="input-group-text">$</span>
+                                <input
+                                    type="text"
+                                    inputmode="numeric"
+                                    id="simulador-posesion-masa"
+                                    class="form-control cost-simulator-input"
+                                    value="80.000.000"
+                                    autocomplete="off"
+                                >
+                            </div>
+                            <small class="cost-simulator-hint">
+                                Utiliza el valor fiscal de los bienes.
+                            </small>
+                        </div>
+
+                        <div class="cost-simulator-field">
+                            <label class="cost-simulator-label" for="simulador-posesion-herederos">
+                                Número de herederos
+                            </label>
+                            <input
+                                type="number"
+                                id="simulador-posesion-herederos"
+                                class="form-control cost-simulator-input"
+                                min="1"
+                                max="100"
+                                value="2"
+                            >
+                            <small class="cost-simulator-hint">
+                                Se supone una distribución igualitaria.
+                            </small>
+                        </div>
+
+                        <div class="cost-simulator-field">
+                            <label class="cost-simulator-label" for="simulador-posesion-parentesco">
+                                Parentesco
+                            </label>
+                            <select
+                                id="simulador-posesion-parentesco"
+                                class="form-select cost-simulator-input"
+                            >
+                                <option value="directo">Cónyuge / hijo / padre / madre</option>
+                                <option value="colateral">Hermano / pariente colateral</option>
+                                <option value="sinparentesco">Sin parentesco directo</option>
+                            </select>
+                            <small class="cost-simulator-hint">
+                                El parentesco influye en el impuesto.
+                            </small>
+                        </div>
+
+                        <div class="cost-simulator-field">
+                            <label class="cost-simulator-label" for="simulador-posesion-propiedades">
+                                Valor fiscal de las propiedades
+                            </label>
+                            <div class="input-group cost-simulator-money">
+                                <span class="input-group-text">$</span>
+                                <input
+                                    type="text"
+                                    inputmode="numeric"
+                                    id="simulador-posesion-propiedades"
+                                    class="form-control cost-simulator-input"
+                                    value="80.000.000"
+                                    autocomplete="off"
+                                >
+                            </div>
+                            <small class="cost-simulator-hint">
+                                Se utiliza para estimar el Conservador.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="cost-result">
+                        <div class="cost-result__head">
+                            <h5>Costo estimado</h5>
+                            <span>Referencial</span>
+                        </div>
+
+                        <div class="cost-result__row">
+                            <span>👨‍⚖️ Honorarios abogado</span>
+                            <strong id="simulador-posesion-abogado">$540.000</strong>
+                        </div>
+                        <div class="cost-result__row">
+                            <span>📄 Registro Civil</span>
+                            <strong id="simulador-posesion-registro">$190.000</strong>
+                        </div>
+                        <div class="cost-result__row">
+                            <span>🏛️ Impuesto a la herencia (SII)</span>
+                            <strong id="simulador-posesion-sii">$0</strong>
+                        </div>
+                        <div class="cost-result__row">
+                            <span>🏡 Conservador</span>
+                            <strong id="simulador-posesion-conservador">$80.000</strong>
+                        </div>
+
+                        <div class="cost-result__total">
+                            <span>Total estimado</span>
+                            <strong id="simulador-posesion-total">$810.000</strong>
+                        </div>
+
+                        <p class="cost-result__note">
+                            * El impuesto a la herencia depende de la asignación de cada
+                            heredero, parentesco, exenciones y demás antecedentes.
+                            Los valores son referenciales.
+                        </p>
+                    </div>
+
+                    <div class="cost-simulator-cta">
+                        <a
+                            href="https://wa.me/56930509306"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-success cost-simulator-whatsapp"
+                            data-conversion-source="simulador_posesion_whatsapp"
+                        >
+                            💬 Quiero revisar mi caso
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         <section class="card about-us did-you-know" id="you_know_what">
 
                 <h3>¿Sabías que...?</h3>
@@ -255,52 +599,7 @@
             </section>
 
             
-       <section class="card about-us why-us" id="why_us_div">
-        <h3>¿Por qué elegirnos?</h3>
-        <p class="why-us__subtitle">Hablamos rápido contigo. La orientación es nuestra prioridad.</p>
-
-        <div class="why-us__grid">
-
-            <div class="why-us__item">
-                <span class="why-us__icon" aria-hidden="true">📜</span>
-                <div>
-                    <strong>Somos especialistas</strong>
-                    <span>Te orientamos en posesión efectiva, testamentos y partición de bienes.</span>
-                </div>
-            </div>
-
-            <div class="why-us__item">
-                <span class="why-us__icon" aria-hidden="true">⚖️</span>
-                <div>
-                    <strong>Te acompañamos siempre</strong>
-                    <span>Te acompañamos en todo momento y en toda hora.</span>
-                </div>
-            </div>
-
-            <div class="why-us__item">
-                <span class="why-us__icon" aria-hidden="true">🛡️</span>
-                <div>
-                    <strong>Protegemos tu patrimonio</strong>
-                    <span>Defendemos tus derechos y te ayudamos a evitar problemas legales futuros.</span>
-                </div>
-            </div>
-
-            <div class="why-us__item">
-                <span class="why-us__icon" aria-hidden="true">🚀</span>
-                <div>
-                    <strong>Hacemos los procesos rápidos</strong>
-                    <span>Para que termines rápido y recibas lo que te corresponde cuanto antes.</span>
-                </div>
-            </div>
-
-        </div>
-
-    <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" data-conversion-source="por_que_elegirnos_whatsapp">
-        💬 Escríbenos ahora
-    </a>
-</section>
-
-            <section class="card services" id="prices">
+       <section class="card services" id="prices">
                 <div class="services__header">
                     <h3>Nuestros Servicios</h3>
                     <p class="services__subtitle">
@@ -367,6 +666,51 @@
                     </article>
                 </div>
             </section>
+
+       <section class="card about-us why-us" id="why_us_div">
+        <h3>¿Por qué elegirnos?</h3>
+        <p class="why-us__subtitle">Hablamos rápido contigo. La orientación es nuestra prioridad.</p>
+
+        <div class="why-us__grid">
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">📜</span>
+                <div>
+                    <strong>Somos especialistas</strong>
+                    <span>Te orientamos en posesión efectiva, testamentos y partición de bienes.</span>
+                </div>
+            </div>
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">⚖️</span>
+                <div>
+                    <strong>Te acompañamos siempre</strong>
+                    <span>Te acompañamos en todo momento y en toda hora.</span>
+                </div>
+            </div>
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">🛡️</span>
+                <div>
+                    <strong>Protegemos tu patrimonio</strong>
+                    <span>Defendemos tus derechos y te ayudamos a evitar problemas legales futuros.</span>
+                </div>
+            </div>
+
+            <div class="why-us__item">
+                <span class="why-us__icon" aria-hidden="true">🚀</span>
+                <div>
+                    <strong>Hacemos los procesos rápidos</strong>
+                    <span>Para que termines rápido y recibas lo que te corresponde cuanto antes.</span>
+                </div>
+            </div>
+
+        </div>
+
+    <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" data-conversion-source="por_que_elegirnos_whatsapp">
+        💬 Escríbenos ahora
+    </a>
+</section>
 
     
     
@@ -704,98 +1048,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
             
         </div>
-        <div id="divorcios-content" data-page="divorcios" style="display: none;">
-            <section class="card hero">
-                <h2>¿Estás enfrentando un divorcio?</h2>
-                <p>
-                    No atravieses este proceso solo. Te ayudamos a proteger tus derechos, acordar medidas provisionales, y llegar a un acuerdo justo —o representarte en juicio cuando sea necesario— con honestidad y claridad.
-                </p>
-                <p>
-                    Nuestro equipo te acompaña desde la asesoría inicial hasta la firma de la sentencia: división de bienes, cuidado de menores, pensiones y acuerdos de convivencia post-divorcio. Buscamos soluciones rápidas y seguras para que puedas cerrar esta etapa y seguir adelante.
-                </p>
-            </section>
-            <section class="card about-us" id="you_know_what_div">
-                <dotlottie-player 
-                    src="https://lottie.host/5d001df6-536a-4ab1-a047-ed6e78a69d89/Zgb8FnLodF.lottie" 
-                    background="transparent" 
-                    speed="1" 
-                    style="width: 300px; height: 300px" 
-                    loop 
-                    autoplay>
-                </dotlottie-player>
-
-                <h3>¿Sabías que...?</h3>
-
-                <p>
-                    Los conflictos durante un divorcio aumentan cuando no hay comunicación ni asesoría profesional. Muchas veces se pierde tiempo y recursos por no actuar con la estrategia correcta.
-                </p>
-
-                <p>
-                    Actuar a tiempo permite acordar medidas provisionales (alimentos, cuidado de hijos, uso de vivienda) que protejan tu situación mientras se resuelve el proceso.
-                </p>
-            </section>
-            <section class="card about-us" id="prices_div">
-                <h3>💲 Nuestros Precios — Divorcios</h3>
-                <div>
-                    <div><b style="color: green">Divorcio de mutuo acuerdo:</b> 3 cuotas de $70.000</div>
-                    <br />
-                    <div><b style="color: green">Divorcio contencioso (representación):</b> 12 cuotas de $100.000</div>
-                    <br />
-                    <div><b style="color: green">Tramitación de medidas provisionales:</b> 4 cuotas de $50.000</div>
-                </div>
-            </section>
-               <section class="card about-us why-us" id="why_us">
-                <h3>¿Por qué elegirnos?</h3>
-                <p class="why-us__subtitle">Cerramos tu caso con estrategia, claridad y acompañamiento real.</p>
-
-                <div class="why-us__grid">
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🎯</span>
-                        <div>
-                            <strong>Expertos en herencias</strong>
-                            <span>Especialistas en juicios de partición y conflictos hereditarios.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">🧾</span>
-                        <div>
-                            <strong>Transparencia total</strong>
-                            <span>Precio claro y sin gastos ocultos.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">💬</span>
-                        <div>
-                            <strong>Cercanía 24/7</strong>
-                            <span>Atención de dudas y seguimiento por WhatsApp.</span>
-                        </div>
-                    </div>
-
-                    <div class="why-us__item">
-                        <span class="why-us__icon" aria-hidden="true">📆</span>
-                        <div>
-                            <strong>Paga en cuotas</strong>
-                            <span>Opciones de pago pensadas para tu tranquilidad.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a class="why-us__cta" href="https://wa.me/56930509306" target="_blank" rel="noopener noreferrer" data-conversion-source="divorcios_whatsapp">
-                    💬 Agenda tu asesoría ahora
-                </a>
-            </section>
-            <section class="card about-us" id="costumers_feedback_div">
-                <div style="width: 97%; text-align: center; display: flex; flex-direction: column;">
-                    <h3>¿Qué Opinan Nuestros Clientes?</h3>
-                    <div class="post-container">
-                        <p style="margin:0;">Clientes reales destacan nuestra cercanía y eficacia en procesos de familia y divorcio.</p>
-                    </div>
-                </div>
-            </section>
-            
-        </div>
     </div>
     <a 
         href="https://wa.me/56930509306" 
@@ -814,39 +1066,723 @@ document.addEventListener("DOMContentLoaded", () => {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <script>
-        (function(){
-            function getQuery(){
-                try{
-                    var q = new URLSearchParams(location.search);
-                    if(q.has('herencias')) return 'herencias';
-                    if(q.has('divorcios')) return 'divorcios';
-                    if(q.get('page') === 'divorcios') return 'divorcios';
-                    if(q.get('page') === 'herencias') return 'herencias';
-                }catch(e){ }
-                return 'herencias';
-            }
+/* =========================================================
+   SIMULADOR DE COSTOS
+========================================================= */
 
-            var page = getQuery();
-            var her = document.getElementById('herencias-content');
-            var div = document.getElementById('divorcios-content');
-            if(page === 'divorcios'){
-                if(her) her.style.display = 'none';
-                if(div) div.style.display = '';
-                document.title = 'Divorcios - Defensa Ciudadana | Asesoría Legal Experta';
-                var meta = document.querySelector('meta[name="description"]');
-                if(meta) meta.setAttribute('content','Asesoría legal en divorcios: protección de hijos, pensiones y división de bienes. Defensa Ciudadana te acompaña con experiencia y cercanía.');
+document.addEventListener("DOMContentLoaded", () => {
+
+    /*
+     * ========================================================
+     * FORMATO PESOS CHILENOS
+     * ========================================================
+     */
+
+    function formatCLP(value) {
+
+        return Math.round(value).toLocaleString("es-CL");
+
+    }
+
+    function parseMoneyCLP(raw) {
+        const digits = String(raw || "").replace(/\D/g, "");
+        return digits ? Number(digits) : 0;
+    }
+
+    function formatMoneyInput(input) {
+        const amount = parseMoneyCLP(input.value);
+        input.value = amount ? formatCLP(amount) : "";
+        return amount;
+    }
+
+    function bindMoneyInput(input, onChange) {
+        if (!input) return;
+
+        formatMoneyInput(input);
+
+        input.addEventListener("input", () => {
+            const amount = formatMoneyInput(input);
+            const caretAtEnd = input.value.length;
+            input.setSelectionRange(caretAtEnd, caretAtEnd);
+            onChange(amount);
+        });
+
+        input.addEventListener("blur", () => {
+            formatMoneyInput(input);
+        });
+    }
+
+
+    /*
+     * ========================================================
+     * ELEMENTOS
+     * ========================================================
+     */
+
+    const tabs =
+        document.querySelectorAll(".cost-simulator-tab");
+
+    const panelParticion =
+        document.getElementById(
+            "cost-simulator-particion"
+        );
+
+    const panelPosesion =
+        document.getElementById(
+            "cost-simulator-posesion"
+        );
+
+
+    /*
+     * ========================================================
+     * CAMBIO ENTRE PARTICIÓN Y POSESIÓN EFECTIVA
+     * ========================================================
+     */
+
+    tabs.forEach(tab => {
+
+        tab.addEventListener("click", () => {
+
+            tabs.forEach(button => {
+
+                button.classList.remove(
+                    "btn-success",
+                    "active"
+                );
+
+                button.classList.add(
+                    "btn-outline-success"
+                );
+
+            });
+
+
+            tab.classList.remove(
+                "btn-outline-success"
+            );
+
+            tab.classList.add(
+                "btn-success",
+                "active"
+            );
+
+
+            if (tab.dataset.type === "particion") {
+
+                panelParticion.style.display = "";
+
+                panelPosesion.style.display = "none";
+
             } else {
-                if(her) her.style.display = '';
-                if(div) div.style.display = 'none';
-                document.title = 'Herencias - Defensa Ciudadana | Asesoría Legal Experta';
-                var meta = document.querySelector('meta[name="description"]');
-                if(meta) meta.setAttribute('content','Obtén asesoría legal profesional en juicios de Herencias. Defensa Ciudadana te ayuda a proteger los derechos de tus hijos con transparencia y compromiso.');
+
+                panelParticion.style.display = "none";
+
+                panelPosesion.style.display = "";
+
             }
 
-            if (typeof window.refreshWhatsAppLinks === 'function') {
-                window.refreshWhatsAppLinks();
+        });
+
+    });
+
+
+    /*
+     * ========================================================
+     * PARTICIÓN
+     * ========================================================
+     */
+
+    const particionDemandados =
+        document.getElementById(
+            "simulador-particion-demandados"
+        );
+
+    const particionValor =
+        document.getElementById(
+            "simulador-particion-valor"
+        );
+
+
+    const particionUbicacion =
+        document.querySelectorAll(
+            'input[name="particion-ubicacion"]'
+        );
+
+
+    /*
+     * Obtener ubicación
+     */
+
+    function getParticionUbicacion() {
+
+        const seleccionado =
+            document.querySelector(
+                'input[name="particion-ubicacion"]:checked'
+            );
+
+        return seleccionado
+            ? seleccionado.value
+            : "santiago";
+
+    }
+
+
+    /*
+     * Calcular partición
+     */
+
+    function calcularParticion() {
+
+        const demandados =
+            Math.max(
+                1,
+                Number(particionDemandados.value) || 1
+            );
+
+
+        const valorComercial =
+            Math.max(
+                0,
+                parseMoneyCLP(particionValor.value)
+            );
+
+
+        /*
+         * Receptor:
+         *
+         * Santiago = $70.000
+         * Regiones = $40.000
+         */
+
+        const valorNotificacion =
+            getParticionUbicacion() === "santiago"
+                ? 70000
+                : 40000;
+
+
+        /*
+         * 3 notificaciones por demandado:
+         *
+         * 1. Demanda
+         * 2. Sentencia
+         * 3. Primera resolución del juez partidor
+         */
+
+        const cantidadNotificaciones =
+            demandados * 3;
+
+
+        const costoReceptores =
+            cantidadNotificaciones *
+            valorNotificacion;
+
+
+        /*
+         * Abogado:
+         *
+         * 12 cuotas de $90.000
+         */
+
+        const honorariosAbogado =
+            12 * 90000;
+
+
+        /*
+         * Juez partidor:
+         *
+         * 7% - 15% del valor comercial.
+         */
+
+        const juezPartidorMin =
+            valorComercial * 0.07;
+
+        const juezPartidorMax =
+            valorComercial * 0.15;
+
+
+        /*
+         * Total mínimo
+         */
+
+        const totalMin =
+            honorariosAbogado +
+            costoReceptores +
+            juezPartidorMin;
+
+
+        /*
+         * Total máximo
+         */
+
+        const totalMax =
+            honorariosAbogado +
+            costoReceptores +
+            juezPartidorMax;
+
+
+        /*
+         * Mostrar resultados
+         */
+
+        document.getElementById(
+            "simulador-particion-abogado"
+        ).textContent =
+            "$" +
+            formatCLP(honorariosAbogado);
+
+
+        document.getElementById(
+            "simulador-particion-receptores"
+        ).textContent =
+            "$" +
+            formatCLP(costoReceptores);
+
+
+        document.getElementById(
+            "simulador-particion-juez"
+        ).textContent =
+            "$" +
+            formatCLP(juezPartidorMin) +
+            " – $" +
+            formatCLP(juezPartidorMax);
+
+
+        document.getElementById(
+            "simulador-particion-total"
+        ).textContent =
+            "$" +
+            formatCLP(totalMin) +
+            " – $" +
+            formatCLP(totalMax);
+
+    }
+
+
+    /*
+     * Eventos partición
+     */
+
+    particionDemandados.addEventListener(
+        "input",
+        calcularParticion
+    );
+
+
+    bindMoneyInput(particionValor, calcularParticion);
+
+
+    particionUbicacion.forEach(radio => {
+
+        radio.addEventListener(
+            "change",
+            calcularParticion
+        );
+
+    });
+
+
+    /*
+     * ========================================================
+     * POSESIÓN EFECTIVA
+     * ========================================================
+     */
+
+    const posesionMasa =
+        document.getElementById(
+            "simulador-posesion-masa"
+        );
+
+    const posesionHerederos =
+        document.getElementById(
+            "simulador-posesion-herederos"
+        );
+
+    const posesionParentesco =
+        document.getElementById(
+            "simulador-posesion-parentesco"
+        );
+
+    const posesionPropiedades =
+        document.getElementById(
+            "simulador-posesion-propiedades"
+        );
+
+
+    /*
+     * ========================================================
+     * UTA REFERENCIAL
+     * ========================================================
+     */
+
+    const UTA_REFERENCIAL = 900000;
+
+
+    /*
+     * ========================================================
+     * IMPUESTO A LA HERENCIA
+     * ========================================================
+     */
+
+    function calcularImpuestoHerencia(
+        asignacion,
+        parentesco
+    ) {
+
+        let exencionUTA = 0;
+
+        let recargo = 0;
+
+
+        if (parentesco === "directo") {
+
+            exencionUTA = 50;
+
+        } else if (parentesco === "colateral") {
+
+            exencionUTA = 5;
+
+            recargo = 0.20;
+
+        } else {
+
+            exencionUTA = 0;
+
+            recargo = 0.40;
+
+        }
+
+
+        /*
+         * Exención
+         */
+
+        const exencion =
+            exencionUTA *
+            UTA_REFERENCIAL;
+
+
+        /*
+         * Base imponible
+         */
+
+        const base =
+            Math.max(
+                0,
+                asignacion - exencion
+            );
+
+
+        if (base <= 0) {
+
+            return 0;
+
+        }
+
+
+        /*
+         * Tramos
+         */
+
+        const UTA =
+            UTA_REFERENCIAL;
+
+
+        const tramos = [
+
+            {
+                limite: 80 * UTA,
+                tasa: 0.01
+            },
+
+            {
+                limite: 160 * UTA,
+                tasa: 0.025
+            },
+
+            {
+                limite: 320 * UTA,
+                tasa: 0.05
+            },
+
+            {
+                limite: 480 * UTA,
+                tasa: 0.075
+            },
+
+            {
+                limite: 640 * UTA,
+                tasa: 0.10
+            },
+
+            {
+                limite: 800 * UTA,
+                tasa: 0.15
+            },
+
+            {
+                limite: 1200 * UTA,
+                tasa: 0.20
+            },
+
+            {
+                limite: Infinity,
+                tasa: 0.25
             }
-        })();
+
+        ];
+
+
+        let impuesto = 0;
+
+        let anterior = 0;
+
+
+        for (const tramo of tramos) {
+
+            const limite =
+                tramo.limite;
+
+
+            const montoTramo =
+                Math.min(
+                    base,
+                    limite
+                ) -
+                anterior;
+
+
+            if (montoTramo > 0) {
+
+                impuesto +=
+                    montoTramo *
+                    tramo.tasa;
+
+            }
+
+
+            if (base <= limite) {
+
+                break;
+
+            }
+
+
+            anterior = limite;
+
+        }
+
+
+        /*
+         * Recargo
+         */
+
+        impuesto *=
+            1 + recargo;
+
+
+        return impuesto;
+
+    }
+
+
+    /*
+     * ========================================================
+     * REGISTRO CIVIL
+     * ========================================================
+     */
+
+    function calcularRegistroCivil(masa) {
+
+        if (masa <= 0) {
+
+            return 0;
+
+        }
+
+
+        /*
+         * Máximo referencial
+         */
+
+        return 190000;
+
+    }
+
+
+    /*
+     * ========================================================
+     * CALCULAR POSESIÓN EFECTIVA
+     * ========================================================
+     */
+
+    function calcularPosesion() {
+
+        const masa =
+            Math.max(
+                0,
+                parseMoneyCLP(posesionMasa.value)
+            );
+
+
+        const herederos =
+            Math.max(
+                1,
+                Number(posesionHerederos.value) || 1
+            );
+
+
+        const propiedades =
+            Math.max(
+                0,
+                parseMoneyCLP(posesionPropiedades.value)
+            );
+
+
+        /*
+         * Abogado:
+         *
+         * 6 cuotas de $90.000
+         */
+
+        const honorariosAbogado =
+            6 * 90000;
+
+
+        /*
+         * Registro Civil
+         */
+
+        const registroCivil =
+            calcularRegistroCivil(masa);
+
+
+        /*
+         * Distribución igualitaria
+         */
+
+        const asignacionPorHeredero =
+            masa /
+            herederos;
+
+
+        /*
+         * Impuesto por heredero
+         */
+
+        const impuestoPorHeredero =
+            calcularImpuestoHerencia(
+                asignacionPorHeredero,
+                posesionParentesco.value
+            );
+
+
+        /*
+         * Impuesto total
+         */
+
+        const impuestoTotal =
+            impuestoPorHeredero *
+            herederos;
+
+
+        /*
+         * Conservador:
+         *
+         * 1/1000 del valor fiscal
+         */
+
+        const conservador =
+            propiedades /
+            1000;
+
+
+        /*
+         * Total
+         */
+
+        const total =
+            honorariosAbogado +
+            registroCivil +
+            impuestoTotal +
+            conservador;
+
+
+        /*
+         * Mostrar
+         */
+
+        document.getElementById(
+            "simulador-posesion-abogado"
+        ).textContent =
+            "$" +
+            formatCLP(honorariosAbogado);
+
+
+        document.getElementById(
+            "simulador-posesion-registro"
+        ).textContent =
+            "$" +
+            formatCLP(registroCivil);
+
+
+        document.getElementById(
+            "simulador-posesion-sii"
+        ).textContent =
+            "$" +
+            formatCLP(impuestoTotal);
+
+
+        document.getElementById(
+            "simulador-posesion-conservador"
+        ).textContent =
+            "$" +
+            formatCLP(conservador);
+
+
+        document.getElementById(
+            "simulador-posesion-total"
+        ).textContent =
+            "$" +
+            formatCLP(total);
+
+    }
+
+
+    /*
+     * Eventos posesión
+     */
+
+    bindMoneyInput(posesionMasa, calcularPosesion);
+
+
+    posesionHerederos.addEventListener(
+        "input",
+        calcularPosesion
+    );
+
+
+    posesionParentesco.addEventListener(
+        "change",
+        calcularPosesion
+    );
+
+
+    bindMoneyInput(posesionPropiedades, calcularPosesion);
+
+
+    /*
+     * ========================================================
+     * CÁLCULO INICIAL
+     * ========================================================
+     */
+
+    calcularParticion();
+
+    calcularPosesion();
+
+});
+
+
     </script>
 </body>
 </html>
