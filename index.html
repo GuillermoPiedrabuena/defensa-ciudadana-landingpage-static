@@ -1355,6 +1355,42 @@ document.addEventListener("DOMContentLoaded", () => {
             " – $" +
             formatCLP(totalMax);
 
+        const ubicacionLabel =
+            getParticionUbicacion() === "santiago"
+                ? "Santiago"
+                : "regiones";
+
+        const particionWhatsApp = document.querySelector(
+            '[data-conversion-source="simulador_particion_whatsapp"]'
+        );
+
+        if (particionWhatsApp) {
+            particionWhatsApp.setAttribute(
+                "data-whatsapp-detail",
+                [
+                    "Datos de mi cotización:",
+                    demandados +
+                        (demandados === 1
+                            ? " demandado"
+                            : " demandados"),
+                    "ubicados en " + ubicacionLabel + ".",
+                    "Valor comercial de la propiedad: $" +
+                        formatCLP(valorComercial) +
+                        ".",
+                    "Total estimado: $" +
+                        formatCLP(totalMin) +
+                        " – $" +
+                        formatCLP(totalMax) +
+                        ".",
+                    "Quiero revisar mi caso."
+                ].join(" ")
+            );
+
+            if (typeof window.refreshWhatsAppLinks === "function") {
+                window.refreshWhatsAppLinks();
+            }
+        }
+
     }
 
 
@@ -1744,6 +1780,49 @@ document.addEventListener("DOMContentLoaded", () => {
         ).textContent =
             "$" +
             formatCLP(total);
+
+        const parentescoOption =
+            posesionParentesco.options[
+                posesionParentesco.selectedIndex
+            ];
+
+        const parentescoLabel =
+            parentescoOption
+                ? parentescoOption.textContent.trim()
+                : posesionParentesco.value;
+
+        const posesionWhatsApp = document.querySelector(
+            '[data-conversion-source="simulador_posesion_whatsapp"]'
+        );
+
+        if (posesionWhatsApp) {
+            posesionWhatsApp.setAttribute(
+                "data-whatsapp-detail",
+                [
+                    "Datos de mi cotización:",
+                    herederos +
+                        (herederos === 1
+                            ? " heredero"
+                            : " herederos") +
+                        ",",
+                    "parentesco: " + parentescoLabel + ".",
+                    "Valor fiscal de la herencia: $" +
+                        formatCLP(masa) +
+                        ".",
+                    "Valor fiscal de las propiedades: $" +
+                        formatCLP(propiedades) +
+                        ".",
+                    "Total estimado: $" +
+                        formatCLP(total) +
+                        ".",
+                    "Quiero revisar mi caso."
+                ].join(" ")
+            );
+
+            if (typeof window.refreshWhatsAppLinks === "function") {
+                window.refreshWhatsAppLinks();
+            }
+        }
 
     }
 

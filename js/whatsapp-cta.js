@@ -18,7 +18,9 @@
         servicio_posesion_whatsapp: 'Consulta por Posesión Efectiva.',
         servicio_corretaje_whatsapp: 'Consulta por Corretaje de Propiedad.',
         como_trabajamos_whatsapp: 'Vi «Cómo trabajamos».',
-        float_whatsapp: 'Usé el botón flotante de WhatsApp.'
+        float_whatsapp: 'Usé el botón flotante de WhatsApp.',
+        simulador_particion_whatsapp: 'Cotice en el simulador de Juicio de Partición.',
+        simulador_posesion_whatsapp: 'Cotice en el simulador de Posesión Efectiva.'
     };
 
     function isWhatsAppLink(link) {
@@ -42,11 +44,16 @@
         var parts = [WHATSAPP_INTRO];
         var source = link.getAttribute('data-conversion-source');
         var section = source && SECTION_MESSAGES[source];
+        var detail = (link.getAttribute('data-whatsapp-detail') || '').trim();
 
         if (section) {
             parts.push(section);
-        } else {
+        } else if (!detail) {
             parts.push('Interés en herencias.');
+        }
+
+        if (detail) {
+            parts.push(detail);
         }
 
         return parts.join(' ');
@@ -84,6 +91,9 @@
         if (!link || !isWhatsAppLink(link)) {
             return;
         }
+
+        // Recalcula el mensaje al hacer click (incluye cotización del simulador).
+        link.href = buildWhatsAppHref(link);
         pushWhatsAppClickEvent(link);
     }
 
