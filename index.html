@@ -323,6 +323,7 @@
 
                 <!-- PARTICIÓN -->
                 <div id="cost-simulator-particion" class="cost-simulator-panel">
+                    <div class="cost-simulator-scroll">
                     <div class="cost-simulator-grid">
                         <div class="cost-simulator-field cost-simulator-field--wide">
                             <span class="cost-simulator-label">¿Dónde están los demandados?</span>
@@ -372,9 +373,9 @@
                                 type="number"
                                 id="simulador-particion-demandados"
                                 class="form-control cost-simulator-input"
-                                min="1"
+                                min="0"
                                 max="100"
-                                value="3"
+                                value="0"
                             >
                             <small class="cost-simulator-hint">
                                 Se estiman 3 notificaciones por demandado.
@@ -392,7 +393,7 @@
                                     inputmode="numeric"
                                     id="simulador-particion-valor"
                                     class="form-control cost-simulator-input"
-                                    value="100.000.000"
+                                    value="0"
                                     autocomplete="off"
                                 >
                             </div>
@@ -414,18 +415,11 @@
                         </div>
                         <div class="cost-result__row">
                             <span>📬 Notificaciones de receptores</span>
-                            <strong id="simulador-particion-receptores">$630.000</strong>
+                            <strong id="simulador-particion-receptores">$0</strong>
                         </div>
                         <div class="cost-result__row">
                             <span>⚖️ Juez partidor</span>
-                            <strong id="simulador-particion-juez">$7.000.000 – $15.000.000</strong>
-                        </div>
-
-                        <div class="cost-result__total">
-                            <span>Total estimado</span>
-                            <strong id="simulador-particion-total">
-                                $8.710.000 – $16.710.000
-                            </strong>
+                            <strong id="simulador-particion-juez">$0 – $0</strong>
                         </div>
 
                         <p class="cost-result__note">
@@ -433,17 +427,27 @@
                             entre 7% y 15% del valor comercial de la propiedad.
                         </p>
                     </div>
+                    </div>
 
-                    <div class="cost-simulator-cta">
-                        <a
-                            href="https://wa.me/56930509306"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-success cost-simulator-whatsapp"
-                            data-conversion-source="simulador_particion_whatsapp"
-                        >
-                            💬 Quiero revisar mi caso
-                        </a>
+                    <div class="cost-simulator-dock">
+                        <div class="cost-result__total">
+                            <span>Total estimado</span>
+                            <strong id="simulador-particion-total">
+                                $1.080.000 – $1.080.000
+                            </strong>
+                        </div>
+                        <div class="cost-simulator-cta">
+                            <a
+                                href="https://wa.me/56930509306"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-success cost-simulator-whatsapp"
+                                data-conversion-source="simulador_particion_whatsapp"
+                            >
+                                💬 Quiero revisar mi caso
+                            </a>
+                            <p class="cost-simulator-error" id="simulador-particion-error" hidden role="alert"></p>
+                        </div>
                     </div>
                 </div>
 
@@ -453,6 +457,7 @@
                     class="cost-simulator-panel"
                     style="display:none;"
                 >
+                    <div class="cost-simulator-scroll">
                     <div class="cost-simulator-grid">
                         <div class="cost-simulator-field">
                             <label class="cost-simulator-label" for="simulador-posesion-masa">
@@ -465,7 +470,7 @@
                                     inputmode="numeric"
                                     id="simulador-posesion-masa"
                                     class="form-control cost-simulator-input"
-                                    value="80.000.000"
+                                    value="0"
                                     autocomplete="off"
                                 >
                             </div>
@@ -482,9 +487,9 @@
                                 type="number"
                                 id="simulador-posesion-herederos"
                                 class="form-control cost-simulator-input"
-                                min="1"
+                                min="0"
                                 max="100"
-                                value="2"
+                                value="0"
                             >
                             <small class="cost-simulator-hint">
                                 Se supone una distribución igualitaria.
@@ -519,7 +524,7 @@
                                     inputmode="numeric"
                                     id="simulador-posesion-propiedades"
                                     class="form-control cost-simulator-input"
-                                    value="80.000.000"
+                                    value="0"
                                     autocomplete="off"
                                 >
                             </div>
@@ -541,7 +546,7 @@
                         </div>
                         <div class="cost-result__row">
                             <span>📄 Registro Civil</span>
-                            <strong id="simulador-posesion-registro">$190.000</strong>
+                            <strong id="simulador-posesion-registro">$0</strong>
                         </div>
                         <div class="cost-result__row">
                             <span>🏛️ Impuesto a la herencia (SII)</span>
@@ -549,12 +554,7 @@
                         </div>
                         <div class="cost-result__row">
                             <span>🏡 Conservador</span>
-                            <strong id="simulador-posesion-conservador">$80.000</strong>
-                        </div>
-
-                        <div class="cost-result__total">
-                            <span>Total estimado</span>
-                            <strong id="simulador-posesion-total">$810.000</strong>
+                            <strong id="simulador-posesion-conservador">$0</strong>
                         </div>
 
                         <p class="cost-result__note">
@@ -563,17 +563,25 @@
                             Los valores son referenciales.
                         </p>
                     </div>
+                    </div>
 
-                    <div class="cost-simulator-cta">
-                        <a
-                            href="https://wa.me/56930509306"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-success cost-simulator-whatsapp"
-                            data-conversion-source="simulador_posesion_whatsapp"
-                        >
-                            💬 Quiero revisar mi caso
-                        </a>
+                    <div class="cost-simulator-dock">
+                        <div class="cost-result__total">
+                            <span>Total estimado</span>
+                            <strong id="simulador-posesion-total">$540.000</strong>
+                        </div>
+                        <div class="cost-simulator-cta">
+                            <a
+                                href="https://wa.me/56930509306"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-success cost-simulator-whatsapp"
+                                data-conversion-source="simulador_posesion_whatsapp"
+                            >
+                                💬 Quiero revisar mi caso
+                            </a>
+                            <p class="cost-simulator-error" id="simulador-posesion-error" hidden role="alert"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1096,7 +1104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function formatMoneyInput(input) {
         const amount = parseMoneyCLP(input.value);
-        input.value = amount ? formatCLP(amount) : "";
+        input.value = formatCLP(amount);
         return amount;
     }
 
@@ -1240,8 +1248,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const demandados =
             Math.max(
-                1,
-                Number(particionDemandados.value) || 1
+                0,
+                Math.floor(Number(particionDemandados.value) || 0)
             );
 
 
@@ -1370,26 +1378,46 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (particionWhatsApp) {
-            particionWhatsApp.setAttribute(
-                "data-whatsapp-detail",
-                [
-                    "Datos de mi cotización:",
-                    demandados +
-                        (demandados === 1
-                            ? " demandado"
-                            : " demandados"),
-                    "ubicados en " + ubicacionLabel + ".",
-                    "Valor comercial de la propiedad: $" +
-                        formatCLP(valorComercial) +
-                        ".",
-                    "Total estimado: $" +
-                        formatCLP(totalMin) +
-                        " – $" +
-                        formatCLP(totalMax) +
-                        ".",
-                    "Quiero revisar mi caso."
-                ].join(" ")
-            );
+            const cotizacionCompleta =
+                demandados > 0 &&
+                valorComercial > 0;
+
+            if (cotizacionCompleta) {
+                particionWhatsApp.setAttribute(
+                    "data-whatsapp-detail",
+                    [
+                        "Datos de mi cotización:",
+                        demandados +
+                            (demandados === 1
+                                ? " demandado"
+                                : " demandados"),
+                        "ubicados en " + ubicacionLabel + ".",
+                        "Valor comercial de la propiedad: $" +
+                            formatCLP(valorComercial) +
+                            ".",
+                        "Total estimado: $" +
+                            formatCLP(totalMin) +
+                            " – $" +
+                            formatCLP(totalMax) +
+                            ".",
+                        "Quiero revisar mi caso."
+                    ].join(" ")
+                );
+            } else {
+                particionWhatsApp.removeAttribute("data-whatsapp-detail");
+            }
+
+            if (demandados > 0) {
+                setSimulatorFieldInvalid(particionDemandados, false);
+            }
+
+            if (valorComercial > 0) {
+                setSimulatorFieldInvalid(particionValor, false);
+            }
+
+            if (cotizacionCompleta) {
+                showSimulatorError("simulador-particion-error", "");
+            }
 
             if (typeof window.refreshWhatsAppLinks === "function") {
                 window.refreshWhatsAppLinks();
@@ -1667,8 +1695,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const herederos =
             Math.max(
-                1,
-                Number(posesionHerederos.value) || 1
+                0,
+                Math.floor(Number(posesionHerederos.value) || 0)
             );
 
 
@@ -1702,8 +1730,9 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         const asignacionPorHeredero =
-            masa /
-            herederos;
+            herederos > 0
+                ? masa / herederos
+                : 0;
 
 
         /*
@@ -1801,28 +1830,53 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (posesionWhatsApp) {
-            posesionWhatsApp.setAttribute(
-                "data-whatsapp-detail",
-                [
-                    "Datos de mi cotización:",
-                    herederos +
-                        (herederos === 1
-                            ? " heredero"
-                            : " herederos") +
-                        ",",
-                    "parentesco: " + parentescoLabel + ".",
-                    "Valor fiscal de la herencia: $" +
-                        formatCLP(masa) +
-                        ".",
-                    "Valor fiscal de las propiedades: $" +
-                        formatCLP(propiedades) +
-                        ".",
-                    "Total estimado: $" +
-                        formatCLP(total) +
-                        ".",
-                    "Quiero revisar mi caso."
-                ].join(" ")
-            );
+            const cotizacionCompleta =
+                masa > 0 &&
+                herederos > 0 &&
+                propiedades > 0;
+
+            if (cotizacionCompleta) {
+                posesionWhatsApp.setAttribute(
+                    "data-whatsapp-detail",
+                    [
+                        "Datos de mi cotización:",
+                        herederos +
+                            (herederos === 1
+                                ? " heredero"
+                                : " herederos") +
+                            ",",
+                        "parentesco: " + parentescoLabel + ".",
+                        "Valor fiscal de la herencia: $" +
+                            formatCLP(masa) +
+                            ".",
+                        "Valor fiscal de las propiedades: $" +
+                            formatCLP(propiedades) +
+                            ".",
+                        "Total estimado: $" +
+                            formatCLP(total) +
+                            ".",
+                        "Quiero revisar mi caso."
+                    ].join(" ")
+                );
+            } else {
+                posesionWhatsApp.removeAttribute("data-whatsapp-detail");
+            }
+
+            if (masa > 0) {
+                setSimulatorFieldInvalid(posesionMasa, false);
+            }
+
+            if (herederos > 0) {
+                setSimulatorFieldInvalid(posesionHerederos, false);
+            }
+
+            if (propiedades > 0) {
+                setSimulatorFieldInvalid(posesionPropiedades, false);
+            }
+
+            if (cotizacionCompleta) {
+                showSimulatorError("simulador-posesion-error", "");
+            }
 
             if (typeof window.refreshWhatsAppLinks === "function") {
                 window.refreshWhatsAppLinks();
@@ -1863,6 +1917,111 @@ document.addEventListener("DOMContentLoaded", () => {
     calcularParticion();
 
     calcularPosesion();
+
+    function setSimulatorFieldInvalid(input, invalid) {
+        if (!input) {
+            return;
+        }
+
+        input.classList.toggle("cost-simulator-input--invalid", invalid);
+        input.setAttribute("aria-invalid", invalid ? "true" : "false");
+
+        const moneyGroup = input.closest(".cost-simulator-money");
+
+        if (moneyGroup) {
+            moneyGroup.classList.toggle(
+                "cost-simulator-money--invalid",
+                invalid
+            );
+        }
+    }
+
+    function showSimulatorError(id, message) {
+        const error = document.getElementById(id);
+
+        if (!error) {
+            return;
+        }
+
+        error.hidden = !message;
+        error.textContent = message || "";
+    }
+
+    window.validateCostSimulatorSend = function (source) {
+        if (source === "simulador_particion_whatsapp") {
+            const demandados = Math.floor(
+                Number(particionDemandados.value) || 0
+            );
+            const valor = parseMoneyCLP(particionValor.value);
+            const faltaDemandados = demandados <= 0;
+            const faltaValor = valor <= 0;
+
+            setSimulatorFieldInvalid(
+                particionDemandados,
+                faltaDemandados
+            );
+            setSimulatorFieldInvalid(particionValor, faltaValor);
+
+            if (faltaDemandados || faltaValor) {
+                showSimulatorError(
+                    "simulador-particion-error",
+                    "Completa los campos para enviar. El número de demandados y el valor de la propiedad tienen que ser mayores que 0."
+                );
+                (faltaDemandados
+                    ? particionDemandados
+                    : particionValor
+                ).focus();
+                return false;
+            }
+
+            showSimulatorError("simulador-particion-error", "");
+            calcularParticion();
+            return true;
+        }
+
+        if (source === "simulador_posesion_whatsapp") {
+            const masa = parseMoneyCLP(posesionMasa.value);
+            const herederos = Math.floor(
+                Number(posesionHerederos.value) || 0
+            );
+            const propiedades = parseMoneyCLP(
+                posesionPropiedades.value
+            );
+            const faltaMasa = masa <= 0;
+            const faltaHerederos = herederos <= 0;
+            const faltaPropiedades = propiedades <= 0;
+
+            setSimulatorFieldInvalid(posesionMasa, faltaMasa);
+            setSimulatorFieldInvalid(
+                posesionHerederos,
+                faltaHerederos
+            );
+            setSimulatorFieldInvalid(
+                posesionPropiedades,
+                faltaPropiedades
+            );
+
+            if (faltaMasa || faltaHerederos || faltaPropiedades) {
+                showSimulatorError(
+                    "simulador-posesion-error",
+                    "Completa los campos para enviar. El valor fiscal de la herencia, el número de herederos y el valor fiscal de las propiedades tienen que ser mayores que 0."
+                );
+                (faltaMasa
+                    ? posesionMasa
+                    : faltaHerederos
+                        ? posesionHerederos
+                        : posesionPropiedades
+                ).focus();
+                return false;
+            }
+
+            showSimulatorError("simulador-posesion-error", "");
+            calcularPosesion();
+            return true;
+        }
+
+        return false;
+    };
 
 });
 

@@ -1328,6 +1328,13 @@ footer a:hover {
 
 .cost-simulator-modal .modal-dialog {
     max-width: min(980px, calc(100vw - 1.5rem));
+    height: calc(100dvh - 1.5rem);
+    max-height: calc(100dvh - 1.5rem);
+}
+
+.cost-simulator-modal .modal-content {
+    height: 100%;
+    max-height: 100%;
 }
 
 .cost-simulator-shell {
@@ -1363,8 +1370,41 @@ footer a:hover {
     font-weight: 800;
 }
 
+.cost-simulator-modal .modal-dialog-scrollable .modal-body {
+    overflow: hidden;
+}
+
 .cost-simulator-body {
-    padding: 0.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 0.5rem 1.5rem 0;
+}
+
+.cost-simulator-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.cost-simulator-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding-bottom: 0.75rem;
+}
+
+.cost-simulator-dock {
+    flex: 0 0 auto;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    margin: 0 -1.5rem;
+    padding: 0.85rem 1.5rem calc(0.95rem + env(safe-area-inset-bottom));
+    background: #fff;
+    border-top: 1px solid rgba(20, 53, 40, 0.12);
+    box-shadow: 0 -14px 28px rgba(16, 68, 40, 0.08);
 }
 
 .cost-simulator-lead {
@@ -1621,24 +1661,32 @@ footer a:hover {
 
 .cost-result__total {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-top: 0.85rem;
-    padding: 0.9rem 1rem;
-    border-radius: 16px;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-top: 0;
+    padding: 1rem 1.15rem 0.95rem;
+    border-radius: 18px;
     background: #143528;
     color: #fff;
+    text-align: center;
 }
 
 .cost-result__total span {
+    font-size: 0.95rem;
     font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
 }
 
 .cost-result__total strong {
-    color: #9dffb0;
-    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-    text-align: right;
+    color: #b6ffc8;
+    font-size: clamp(1.55rem, 3.4vw, 2.05rem);
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
 }
 
 .cost-result__note {
@@ -1650,15 +1698,77 @@ footer a:hover {
 
 .cost-simulator-cta {
     display: flex;
-    justify-content: center;
-    margin-top: 1.2rem;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 0.75rem;
 }
 
-.cost-simulator-whatsapp {
-    border-radius: 999px;
-    padding: 0.8rem 1.35rem;
+.btn.cost-simulator-whatsapp {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #1d4ed8;
+    --bs-btn-border-color: #1d4ed8;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #1e40af;
+    --bs-btn-hover-border-color: #1e3a8a;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #1e3a8a;
+    --bs-btn-active-border-color: #1e3a8a;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #1d4ed8;
+    --bs-btn-disabled-border-color: #1d4ed8;
+    --bs-btn-padding-y: 1.05rem;
+    --bs-btn-padding-x: 1.35rem;
+    --bs-btn-font-size: 1.45rem;
+    --bs-btn-font-weight: 800;
+    --bs-btn-border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 76px;
+    border-radius: 16px;
+    padding: 1.05rem 1.35rem;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-align: center;
+    color: #fff;
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    box-shadow: 0 12px 26px rgba(29, 78, 216, 0.32);
+}
+
+.btn.cost-simulator-whatsapp:hover,
+.btn.cost-simulator-whatsapp:focus {
+    color: #fff;
+    background-color: #1e40af;
+    border-color: #1e3a8a;
+}
+
+.cost-simulator-error {
+    width: 100%;
+    margin: 0.85rem 0 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e11d48;
+    border-radius: 14px;
+    background: #fff1f2;
+    color: #9f1239;
+    font-size: 0.95rem;
     font-weight: 700;
-    box-shadow: 0 10px 22px rgba(20, 115, 71, 0.2);
+    line-height: 1.45;
+    text-align: center;
+}
+
+.cost-simulator-error[hidden] {
+    display: none !important;
+}
+
+.cost-simulator-input--invalid,
+.cost-simulator-money--invalid .form-control,
+.cost-simulator-money--invalid .input-group-text {
+    border-color: #e11d48 !important;
+    background: #fff7f7;
 }
 
 @media (max-width: 768px) {
@@ -1674,13 +1784,21 @@ footer a:hover {
         padding-right: 1rem;
     }
 
-    .cost-result__total {
-        flex-direction: column;
-        align-items: flex-start;
+    .cost-simulator-dock {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .btn.cost-simulator-whatsapp {
+        --bs-btn-font-size: 1.28rem;
+        min-height: 70px;
+        font-size: 1.28rem;
     }
 
     .cost-result__total strong {
-        text-align: left;
+        font-size: 1.45rem;
     }
 }
 

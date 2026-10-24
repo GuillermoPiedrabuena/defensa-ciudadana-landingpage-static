@@ -368,25 +368,37 @@
             return;
         }
 
-        // Recalcula el mensaje al hacer click (incluye cotización del simulador).
+        if (isSimulatorWhatsApp(link)) {
+            var quoteIsComplete =
+                typeof window.validateCostSimulatorSend === 'function' &&
+                window.validateCostSimulatorSend(
+                    link.getAttribute('data-conversion-source')
+                ) === true;
+
+            if (!quoteIsComplete) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+
+            link.href = buildWhatsAppHref(link);
+
+            if (hasRecordedConversion()) {
+                event.preventDefault();
+                event.stopPropagation();
+                openRepeatContactModal(link.href);
+                return;
+            }
+
+            pushWhatsAppClickEvent(link);
+            recordConversion();
+            return;
+        }
+
         link.href = buildWhatsAppHref(link);
-
-        if (!isSimulatorWhatsApp(link)) {
-            event.preventDefault();
-            event.stopPropagation();
-            openIntentModal(link.getAttribute('data-conversion-source') || '');
-            return;
-        }
-
-        if (hasRecordedConversion()) {
-            event.preventDefault();
-            event.stopPropagation();
-            openRepeatContactModal(link.href);
-            return;
-        }
-
-        pushWhatsAppClickEvent(link);
-        recordConversion();
+        event.preventDefault();
+        event.stopPropagation();
+        openIntentModal(link.getAttribute('data-conversion-source') || '');
     }
 
     function init() {
