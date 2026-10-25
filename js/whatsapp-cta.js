@@ -27,18 +27,35 @@
         servicio_posesion_whatsapp: 'Consulta por Posesión Efectiva.',
         servicio_corretaje_whatsapp: 'Consulta por Corretaje de Propiedad.',
         como_trabajamos_whatsapp: 'Vi «Cómo trabajamos».',
-        float_whatsapp: 'Usé el botón flotante de WhatsApp.',
         simulador_particion_whatsapp: 'Cotice en el simulador de Juicio de Partición.',
         simulador_posesion_whatsapp: 'Cotice en el simulador de Posesión Efectiva.'
     };
 
     function isWhatsAppLink(link) {
-        var href = (link.getAttribute('href') || '').toLowerCase();
+        if (link.getAttribute('data-conversion-source')) {
+            return true;
+        }
+
+        var href = (
+            link.getAttribute('data-wa-href') ||
+            link.getAttribute('href') ||
+            ''
+        ).toLowerCase();
         return (
             href.indexOf('wa.me/') !== -1 ||
             href.indexOf('api.whatsapp.com') !== -1 ||
             href.indexOf('web.whatsapp.com') !== -1
         );
+    }
+
+    function neutralizeWhatsAppLink(link) {
+        var href = link.getAttribute('href') || '';
+
+        if (href.indexOf('wa.me/') !== -1 || href.indexOf('api.whatsapp.com') !== -1) {
+            link.setAttribute('data-wa-href', href);
+        }
+
+        link.setAttribute('href', '#simulador-costos');
     }
 
     function getConversionSource(link) {
@@ -357,7 +374,19 @@
     }
 
     function applyWhatsAppMessages() {
-        document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
+        document.querySelectorAll('a[data-conversion-source], a[href*="wa.me"]').forEach(function (link) {
+            if (!isSimulatorWhatsApp(link)) {
+                neutralizeWhatsAppLink(link);
+                return;
+            }
+
+            var detail = (link.getAttribute('data-whatsapp-detail') || '').trim();
+
+            if (!detail) {
+                neutralizeWhatsAppLink(link);
+                return;
+            }
+
             link.href = buildWhatsAppHref(link);
         });
     }
@@ -395,7 +424,7 @@
             return;
         }
 
-        link.href = buildWhatsAppHref(link);
+        neutralizeWhatsAppLink(link);
         event.preventDefault();
         event.stopPropagation();
         openIntentModal(link.getAttribute('data-conversion-source') || '');
