@@ -1385,14 +1385,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 particionWhatsApp.setAttribute(
                     "data-whatsapp-detail",
                     [
-                        "Datos de mi cotización:",
-                        demandados +
+                        "Datos de mi cotización: " +
+                            demandados +
                             (demandados === 1
                                 ? " demandado"
-                                : " demandados"),
-                        "ubicados en " + ubicacionLabel + ".",
+                                : " demandados") +
+                            " ubicados en " +
+                            ubicacionLabel +
+                            ".",
                         "Valor comercial de la propiedad: $" +
                             formatCLP(valorComercial) +
+                            ".",
+                        "Honorarios abogado: $" +
+                            formatCLP(honorariosAbogado) +
+                            ".",
+                        "Notificaciones de receptores: $" +
+                            formatCLP(costoReceptores) +
+                            ".",
+                        "Juez partidor: $" +
+                            formatCLP(juezPartidorMin) +
+                            " – $" +
+                            formatCLP(juezPartidorMax) +
                             ".",
                         "Total estimado: $" +
                             formatCLP(totalMin) +
@@ -1400,7 +1413,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             formatCLP(totalMax) +
                             ".",
                         "Quiero revisar mi caso."
-                    ].join(" ")
+                    ].join("\n")
                 );
             } else {
                 particionWhatsApp.removeAttribute("data-whatsapp-detail");
@@ -1838,24 +1851,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 posesionWhatsApp.setAttribute(
                     "data-whatsapp-detail",
                     [
-                        "Datos de mi cotización:",
-                        herederos +
+                        "Datos de mi cotización: " +
+                            herederos +
                             (herederos === 1
                                 ? " heredero"
                                 : " herederos") +
-                            ",",
-                        "parentesco: " + parentescoLabel + ".",
+                            ", parentesco: " +
+                            parentescoLabel +
+                            ".",
                         "Valor fiscal de la herencia: $" +
                             formatCLP(masa) +
                             ".",
                         "Valor fiscal de las propiedades: $" +
                             formatCLP(propiedades) +
                             ".",
+                        "Honorarios abogado: $" +
+                            formatCLP(honorariosAbogado) +
+                            ".",
+                        "Registro Civil: $" +
+                            formatCLP(registroCivil) +
+                            ".",
+                        "Impuesto a la herencia: $" +
+                            formatCLP(impuestoTotal) +
+                            ".",
+                        "Conservador: $" +
+                            formatCLP(conservador) +
+                            ".",
                         "Total estimado: $" +
                             formatCLP(total) +
                             ".",
                         "Quiero revisar mi caso."
-                    ].join(" ")
+                    ].join("\n")
                 );
             } else {
                 posesionWhatsApp.removeAttribute("data-whatsapp-detail");
