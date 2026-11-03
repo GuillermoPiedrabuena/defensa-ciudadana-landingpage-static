@@ -82,7 +82,7 @@
             parts.push(detail);
         }
 
-        return parts.join(' ');
+        return parts.join(detail.indexOf('\n') !== -1 ? '\n' : ' ');
     }
 
     function buildWhatsAppHref(link) {
@@ -238,6 +238,10 @@
         return Boolean(link.closest('#costSimulatorModal'));
     }
 
+    function isDirectQuestion(link) {
+        return link.getAttribute('data-conversion-source') === 'simulador_pregunta_directa';
+    }
+
     function getIntentModal() {
         return document.getElementById('wa-intent-modal');
     }
@@ -375,6 +379,11 @@
 
     function applyWhatsAppMessages() {
         document.querySelectorAll('a[data-conversion-source], a[href*="wa.me"]').forEach(function (link) {
+            if (isDirectQuestion(link)) {
+                link.href = buildWhatsAppHref(link);
+                return;
+            }
+
             if (!isSimulatorWhatsApp(link)) {
                 neutralizeWhatsAppLink(link);
                 return;
@@ -398,6 +407,21 @@
         }
 
         if (isSimulatorWhatsApp(link)) {
+            if (isDirectQuestion(link)) {
+                link.href = buildWhatsAppHref(link);
+
+                if (hasRecordedConversion()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    openRepeatContactModal(link.href);
+                    return;
+                }
+
+                pushWhatsAppClickEvent(link);
+                recordConversion();
+                return;
+            }
+
             var quoteIsComplete =
                 typeof window.validateCostSimulatorSend === 'function' &&
                 window.validateCostSimulatorSend(

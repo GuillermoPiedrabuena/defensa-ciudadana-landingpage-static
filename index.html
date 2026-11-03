@@ -51,7 +51,7 @@
                 </p>
                 <a href="#prices" rel="noopener noreferrer">
                     <p  style="cursor: pointer; color: green; background-color: white; width: clamp(300px, 35%, 10vw); justify-content: center; display: flex; margin: 10px auto; padding: 10px; border-radius: 15px;">
-                        Paga en cuotas desde $90.000
+                        Paga en cuotas desde $70.000
                     </p>
                 </a>
                 <a 
@@ -446,6 +446,16 @@
                                 💬 Quiero revisar mi caso
                             </a>
                             <p class="cost-simulator-error" id="simulador-particion-error" hidden role="alert"></p>
+                            <a
+                                href="https://wa.me/56930509306"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="cost-simulator-direct"
+                                data-conversion-source="simulador_pregunta_directa"
+                                data-whatsapp-detail="No quise hacer una simulación de costos. Prefiero preguntar directamente."
+                            >
+                                Prefiero preguntar directamente
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -580,6 +590,16 @@
                                 💬 Quiero revisar mi caso
                             </a>
                             <p class="cost-simulator-error" id="simulador-posesion-error" hidden role="alert"></p>
+                            <a
+                                href="https://wa.me/56930509306"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="cost-simulator-direct"
+                                data-conversion-source="simulador_pregunta_directa"
+                                data-whatsapp-detail="No quise hacer una simulación de costos. Prefiero preguntar directamente."
+                            >
+                                Prefiero preguntar directamente
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1074,7 +1094,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <footer>
         <p>© 2024 Defensa Ciudadana. Todos los derechos reservados.</p>
     </footer>
-    <script src="./js/whatsapp-cta.js?v=20261025b"></script>
+    <script src="./js/whatsapp-cta.js?v=20261103b"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <script>
@@ -1385,28 +1405,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 particionWhatsApp.setAttribute(
                     "data-whatsapp-detail",
                     [
-                        "Datos de mi cotización: " +
-                            demandados +
+                        "Desglose de la simulación:",
+                        demandados +
                             (demandados === 1
                                 ? " demandado"
                                 : " demandados") +
-                            " ubicados en " +
+                            " en " +
                             ubicacionLabel +
-                            ".",
-                        "Valor comercial de la propiedad: $" +
+                            ". Valor comercial de la propiedad: $" +
                             formatCLP(valorComercial) +
                             ".",
-                        "Honorarios abogado: $" +
+                        "Costo de abogado: $" +
                             formatCLP(honorariosAbogado) +
                             ".",
-                        "Notificaciones de receptores: $" +
+                        "Costo de notificaciones: $" +
                             formatCLP(costoReceptores) +
-                            ".",
-                        "Juez partidor: $" +
+                            " (" +
+                            cantidadNotificaciones +
+                            (cantidadNotificaciones === 1
+                                ? " notificación"
+                                : " notificaciones") +
+                            " a $" +
+                            formatCLP(valorNotificacion) +
+                            ").",
+                        "Costo de juez partidor: $" +
                             formatCLP(juezPartidorMin) +
                             " – $" +
                             formatCLP(juezPartidorMax) +
-                            ".",
+                            " (7% a 15% del valor comercial).",
                         "Total estimado: $" +
                             formatCLP(totalMin) +
                             " – $" +
