@@ -832,6 +832,24 @@ img {
     white-space: nowrap;
 }
 
+.service-card__pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.service-card__total {
+    font-weight: 700;
+    color: #374151;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
 .service-card__list {
     list-style: none;
     padding: 0;
@@ -901,6 +919,14 @@ img {
     }
 
     .service-card__price {
+        white-space: normal;
+    }
+
+    .service-card__pricing {
+        align-items: flex-start;
+    }
+
+    .service-card__total {
         white-space: normal;
     }
 }
@@ -2007,4 +2033,3 @@ body.wa-intent-modal-open {
         padding-top: 0;
     }
 }
-

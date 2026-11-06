@@ -116,14 +116,14 @@
 
                     <article class="team-card">
                         <div class="team-card__media">
-                            <img src="./assets/renato.png" alt="Renato Salfate">
+                            <img src="./assets/daniel.png" alt="Daniel Klima León">
                         </div>
                         <div class="team-card__body">
-                            <div class="team-card__name">Renato Salfate</div>
-                            <div class="team-card__role">Procurador litigación</div>
-                            <div class="team-card__specialty">Universidad Diego Portales</div>
+                            <div class="team-card__name">Daniel Klima León</div>
+                            <div class="team-card__role">Abogado Litigante</div>
+                            <div class="team-card__specialty">Universidad Gabriela Mistral</div>
                             <div class="team-card__desc">Litigación y acompañamiento en juicios.</div>
-                            <a class="team-card__link" href="https://www.linkedin.com/in/renato-salfate-gómez-2461aa255" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de Renato en LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                            <a class="team-card__link" href="https://www.linkedin.com/in/abogadolaboraldanielklimaleon/" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil de Daniel en LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
                         </div>
                     </article>
                 </div>
@@ -410,7 +410,7 @@
 
                         <div class="cost-result__row">
                             <span>👨‍⚖️ Honorarios abogado</span>
-                            <strong id="simulador-particion-abogado">$1.080.000</strong>
+                            <strong id="simulador-particion-abogado">$1.120.000</strong>
                         </div>
                         <div class="cost-result__row">
                             <span>📬 Notificaciones de receptores</span>
@@ -432,7 +432,7 @@
                         <div class="cost-result__total">
                             <span>Total estimado</span>
                             <strong id="simulador-particion-total">
-                                $1.080.000 – $1.080.000
+                                $1.120.000 – $1.120.000
                             </strong>
                         </div>
                         <div class="cost-simulator-cta">
@@ -551,7 +551,7 @@
 
                         <div class="cost-result__row">
                             <span>👨‍⚖️ Honorarios abogado</span>
-                            <strong id="simulador-posesion-abogado">$540.000</strong>
+                            <strong id="simulador-posesion-abogado">$560.000</strong>
                         </div>
                         <div class="cost-result__row">
                             <span>📄 Registro Civil</span>
@@ -577,7 +577,7 @@
                     <div class="cost-simulator-dock">
                         <div class="cost-result__total">
                             <span>Total estimado</span>
-                            <strong id="simulador-posesion-total">$540.000</strong>
+                            <strong id="simulador-posesion-total">$560.000</strong>
                         </div>
                         <div class="cost-simulator-cta">
                             <a
@@ -647,7 +647,10 @@
                                 <span class="service-card__icon" aria-hidden="true">⚖️</span>
                                 <h4>Juicio de Partición</h4>
                             </div>
-                            <div class="service-card__price">12 cuotas de $90.000</div>
+                            <div class="service-card__pricing">
+                                <div class="service-card__price">16 cuotas de $70.000</div>
+                                <div class="service-card__total">Total cuotas: $1.120.000</div>
+                            </div>
                         </div>
 
                         <ul class="service-card__list">
@@ -666,7 +669,10 @@
                                 <span class="service-card__icon" aria-hidden="true">📄</span>
                                 <h4>Posesión Efectiva</h4>
                             </div>
-                            <div class="service-card__price">6 cuotas de $90.000</div>
+                            <div class="service-card__pricing">
+                                <div class="service-card__price">8 cuotas de $70.000</div>
+                                <div class="service-card__total">Total cuotas: $560.000</div>
+                            </div>
                         </div>
 
                         <ul class="service-card__list">
@@ -1312,11 +1318,11 @@ document.addEventListener("DOMContentLoaded", () => {
         /*
          * Abogado:
          *
-         * 12 cuotas de $90.000
+         * 16 cuotas de $70.000
          */
 
         const honorariosAbogado =
-            12 * 90000;
+            16 * 70000;
 
 
         /*
@@ -1402,6 +1408,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 valorComercial > 0;
 
             if (cotizacionCompleta) {
+                particionWhatsApp.removeAttribute("data-simulator-no-quote");
                 particionWhatsApp.setAttribute(
                     "data-whatsapp-detail",
                     [
@@ -1442,7 +1449,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     ].join("\n")
                 );
             } else {
-                particionWhatsApp.removeAttribute("data-whatsapp-detail");
+                particionWhatsApp.setAttribute(
+                    "data-simulator-no-quote",
+                    ""
+                );
+                particionWhatsApp.setAttribute(
+                    "data-whatsapp-detail",
+                    "No realicé la simulación. Quiero revisar mi caso."
+                );
             }
 
             if (demandados > 0) {
@@ -1748,11 +1762,11 @@ document.addEventListener("DOMContentLoaded", () => {
         /*
          * Abogado:
          *
-         * 6 cuotas de $90.000
+         * 8 cuotas de $70.000
          */
 
         const honorariosAbogado =
-            6 * 90000;
+            8 * 70000;
 
 
         /*
@@ -1874,6 +1888,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 propiedades > 0;
 
             if (cotizacionCompleta) {
+                posesionWhatsApp.removeAttribute("data-simulator-no-quote");
                 posesionWhatsApp.setAttribute(
                     "data-whatsapp-detail",
                     [
@@ -1910,7 +1925,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     ].join("\n")
                 );
             } else {
-                posesionWhatsApp.removeAttribute("data-whatsapp-detail");
+                posesionWhatsApp.setAttribute(
+                    "data-simulator-no-quote",
+                    ""
+                );
+                posesionWhatsApp.setAttribute(
+                    "data-whatsapp-detail",
+                    "No realicé la simulación. Quiero revisar mi caso."
+                );
             }
 
             if (masa > 0) {
@@ -2004,6 +2026,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 Number(particionDemandados.value) || 0
             );
             const valor = parseMoneyCLP(particionValor.value);
+            const noInicioSimulacion =
+                demandados <= 0 &&
+                valor <= 0;
+
+            if (noInicioSimulacion) {
+                setSimulatorFieldInvalid(particionDemandados, false);
+                setSimulatorFieldInvalid(particionValor, false);
+                showSimulatorError("simulador-particion-error", "");
+                calcularParticion();
+                return true;
+            }
+
             const faltaDemandados = demandados <= 0;
             const faltaValor = valor <= 0;
 
@@ -2038,6 +2072,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const propiedades = parseMoneyCLP(
                 posesionPropiedades.value
             );
+            const noInicioSimulacion =
+                masa <= 0 &&
+                herederos <= 0 &&
+                propiedades <= 0;
+
+            if (noInicioSimulacion) {
+                setSimulatorFieldInvalid(posesionMasa, false);
+                setSimulatorFieldInvalid(posesionHerederos, false);
+                setSimulatorFieldInvalid(posesionPropiedades, false);
+                showSimulatorError("simulador-posesion-error", "");
+                calcularPosesion();
+                return true;
+            }
+
             const faltaMasa = masa <= 0;
             const faltaHerederos = herederos <= 0;
             const faltaPropiedades = propiedades <= 0;

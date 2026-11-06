@@ -72,7 +72,7 @@
         var section = source && SECTION_MESSAGES[source];
         var detail = (link.getAttribute('data-whatsapp-detail') || '').trim();
 
-        if (section) {
+        if (section && !link.hasAttribute('data-simulator-no-quote')) {
             parts.push(section);
         } else if (!detail) {
             parts.push('Interés en herencias.');
