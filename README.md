@@ -40,3 +40,5 @@ dataLayer.push({ event: 'whatsapp_click', conversion_source: '...' });
 ## WhatsApp — mensaje desde la web
 
 Los enlaces se arman en `js/whatsapp-cta.js` con mensaje que empieza con **⚖️** y texto según la sección (`data-conversion-source`).
+
+Todos los botones de contacto muestran primero un aviso con las opciones de cancelar, simular costos o hablar con un abogado. La simulación se puede enviar aunque no se completen sus datos. Se permiten dos contactos por navegador; al intentar un tercero se muestra un aviso y no se abre WhatsApp. La conversión de Google Ads se registra una sola vez.

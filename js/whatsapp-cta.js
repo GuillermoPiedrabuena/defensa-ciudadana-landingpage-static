@@ -1,9 +1,7 @@
 /**
  * WhatsApp: mensaje prellenado (⚖️) + evento GTM whatsapp_click para conversiones.
- * Los botones de la página no abren el chat ni envían la conversión: muestran un aviso
- * y, si la persona confirma, el simulador de costos.
- * La conversión se envía una sola vez, al escribir desde ese simulador.
- * Un segundo intento de WhatsApp abre un aviso y no vuelve a convertir.
+ * Los botones de WhatsApp muestran un aviso con las opciones para continuar,
+ * simular costos o cancelar. Cada persona puede iniciar hasta dos contactos.
  */
 (function (window, document) {
     'use strict';
@@ -11,8 +9,11 @@
     var WHATSAPP_PHONE = '56930509306';
     var GTM_EVENT = 'whatsapp_click';
     var CONVERSION_STORAGE_KEY = 'dc_whatsapp_ads_conversion';
-    var pendingWhatsAppHref = '';
+    var CONTACT_COUNT_STORAGE_KEY = 'dc_whatsapp_contact_count';
+    var contactCountFallback = 0;
+    var conversionRecordedFallback = false;
     var pendingIntentSource = '';
+    var pendingIntentLink = null;
     var lastFocusedElement = null;
     var intentFocusedElement = null;
 
@@ -110,11 +111,28 @@
         try {
             return Boolean(window.localStorage.getItem(CONVERSION_STORAGE_KEY));
         } catch (err) {
-            return false;
+            return conversionRecordedFallback;
+        }
+    }
+
+    function getContactCount() {
+        try {
+            var storedCount = window.localStorage.getItem(CONTACT_COUNT_STORAGE_KEY);
+            if (storedCount !== null) {
+                var parsedCount = Number(storedCount);
+                return Number.isInteger(parsedCount) && parsedCount >= 0
+                    ? parsedCount
+                    : 0;
+            }
+
+            return window.localStorage.getItem(CONVERSION_STORAGE_KEY) ? 1 : 0;
+        } catch (err) {
+            return contactCountFallback;
         }
     }
 
     function recordConversion() {
+        conversionRecordedFallback = true;
         try {
             window.localStorage.setItem(
                 CONVERSION_STORAGE_KEY,
@@ -125,6 +143,23 @@
             );
         } catch (err) {
             // Si el navegador bloquea localStorage, el clic igual puede enviar la conversión.
+        }
+    }
+
+    function recordContact(link) {
+        contactCountFallback = getContactCount() + 1;
+        try {
+            window.localStorage.setItem(
+                CONTACT_COUNT_STORAGE_KEY,
+                String(contactCountFallback)
+            );
+        } catch (err) {
+            // Se mantiene el límite durante la sesión si el navegador bloquea localStorage.
+        }
+
+        if (!hasRecordedConversion()) {
+            pushWhatsAppClickEvent(link);
+            recordConversion();
         }
     }
 
@@ -145,13 +180,12 @@
         root.innerHTML =
             '<div class="wa-repeat-modal__backdrop" data-wa-repeat-cancel></div>' +
             '<div class="wa-repeat-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="wa-repeat-title" aria-describedby="wa-repeat-text">' +
-                '<p class="wa-repeat-modal__eyebrow">Antes de escribirnos otra vez</p>' +
-                '<h2 id="wa-repeat-title"><span>Usted ya nos</span> <span>contactó una vez</span></h2>' +
-                '<p id="wa-repeat-text" class="wa-repeat-modal__text">¿Está seguro de que necesita un abogado? Recuerde que <strong>somos abogados privados y la asesoría tiene un costo.</strong> Si aun así quiere que lo orientemos, puede continuar con toda confianza.</p>' +
-                '<div class="wa-repeat-modal__actions">' +
-                    '<button type="button" class="wa-repeat-modal__confirm" data-wa-repeat-confirm>Sí, sé lo que hago</button>' +
-                    '<button type="button" class="wa-repeat-modal__cancel" data-wa-repeat-cancel>Cancelar</button>' +
-                '</div>' +
+            '<p class="wa-repeat-modal__eyebrow">Límite de cotizaciones</p>' +
+            '<h2 id="wa-repeat-title">Ya se ha cotizado 2 veces</h2>' +
+            '<p id="wa-repeat-text" class="wa-repeat-modal__text">No enviaremos este nuevo contacto a WhatsApp.</p>' +
+            '<div class="wa-repeat-modal__actions">' +
+                '<button type="button" class="wa-repeat-modal__cancel" data-wa-repeat-cancel>Entendido</button>' +
+            '</div>' +
             '</div>';
 
         document.body.appendChild(root);
@@ -167,12 +201,6 @@
 
     function onRepeatModalClick(event) {
         var cancel = event.target.closest('[data-wa-repeat-cancel]');
-        var confirm = event.target.closest('[data-wa-repeat-confirm]');
-
-        if (confirm) {
-            confirmRepeatContact();
-            return;
-        }
 
         if (cancel) {
             closeRepeatModal();
@@ -193,15 +221,14 @@
         trapModalTab(event, getRepeatModal());
     }
 
-    function openRepeatContactModal(href) {
+    function openRepeatContactModal() {
         var modal = ensureRepeatModal();
-        pendingWhatsAppHref = href;
         lastFocusedElement = document.activeElement;
         modal.hidden = false;
         document.body.classList.add('wa-repeat-modal-open');
-        var confirmButton = modal.querySelector('[data-wa-repeat-confirm]');
-        if (confirmButton) {
-            confirmButton.focus();
+        var closeButton = modal.querySelector('[data-wa-repeat-cancel]');
+        if (closeButton) {
+            closeButton.focus();
         }
     }
 
@@ -212,34 +239,12 @@
         }
 
         modal.hidden = true;
-        pendingWhatsAppHref = '';
         document.body.classList.remove('wa-repeat-modal-open');
 
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
             lastFocusedElement.focus();
         }
         lastFocusedElement = null;
-    }
-
-    function confirmRepeatContact() {
-        var href = pendingWhatsAppHref;
-        closeRepeatModal();
-        if (!href) {
-            return;
-        }
-
-        var opened = window.open(href, '_blank', 'noopener,noreferrer');
-        if (!opened) {
-            window.location.href = href;
-        }
-    }
-
-    function isSimulatorWhatsApp(link) {
-        return Boolean(link.closest('#costSimulatorModal'));
-    }
-
-    function isDirectQuestion(link) {
-        return link.getAttribute('data-conversion-source') === 'simulador_pregunta_directa';
     }
 
     function getIntentModal() {
@@ -261,10 +266,11 @@
             '<div class="wa-repeat-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="wa-intent-title" aria-describedby="wa-intent-text">' +
                 '<p class="wa-repeat-modal__eyebrow">Antes de contactarnos</p>' +
                 '<h2 id="wa-intent-title"><span>¿Está seguro de que</span> <span>necesita un abogado?</span></h2>' +
-                '<p id="wa-intent-text" class="wa-repeat-modal__text">Lo atendemos con gusto. Este paso es para cotizar un servicio legal de herencia o juicio de partición. <strong>Somos abogados privados y la asesoría tiene un costo.</strong> Si sabe lo que necesita y quiere seguir, le mostramos una estimación antes de escribirnos.</p>' +
+                '<p id="wa-intent-text" class="wa-repeat-modal__text">Lo atendemos con gusto. Este paso es para cotizar un servicio legal de herencia o juicio de partición. <strong>Somos abogados privados y la asesoría tiene un costo.</strong> Si sabe lo que necesita y quiere seguir, elija cómo desea continuar.</p>' +
                 '<div class="wa-repeat-modal__actions">' +
-                    '<button type="button" class="wa-repeat-modal__confirm" data-wa-intent-confirm>Sí, sé lo que hago y necesito un servicio legal de herencia o partición</button>' +
                     '<button type="button" class="wa-repeat-modal__cancel" data-wa-intent-cancel>No por ahora</button>' +
+                    '<button type="button" class="wa-repeat-modal__simulate" data-wa-intent-simulate>Simular costos</button>' +
+                    '<button type="button" class="wa-repeat-modal__confirm" data-wa-intent-contact>Hablar con un abogado</button>' +
                 '</div>' +
             '</div>';
 
@@ -280,7 +286,12 @@
     }
 
     function onIntentModalClick(event) {
-        if (event.target.closest('[data-wa-intent-confirm]')) {
+        if (event.target.closest('[data-wa-intent-contact]')) {
+            contactLawyer();
+            return;
+        }
+
+        if (event.target.closest('[data-wa-intent-simulate]')) {
             confirmIntent();
             return;
         }
@@ -331,9 +342,9 @@
         intentFocusedElement = document.activeElement;
         modal.hidden = false;
         document.body.classList.add('wa-intent-modal-open');
-        var confirmButton = modal.querySelector('[data-wa-intent-confirm]');
-        if (confirmButton) {
-            confirmButton.focus();
+        var cancelButton = modal.querySelector('[data-wa-intent-cancel]');
+        if (cancelButton) {
+            cancelButton.focus();
         }
     }
 
@@ -344,7 +355,10 @@
         }
 
         modal.hidden = true;
-        pendingIntentSource = skipFocusRestore ? pendingIntentSource : '';
+        if (!skipFocusRestore) {
+            pendingIntentSource = '';
+            pendingIntentLink = null;
+        }
         document.body.classList.remove('wa-intent-modal-open');
 
         if (!skipFocusRestore && intentFocusedElement && typeof intentFocusedElement.focus === 'function') {
@@ -372,30 +386,36 @@
         var source = pendingIntentSource;
         closeIntentModal(true);
         pendingIntentSource = '';
+        pendingIntentLink = null;
         window.requestAnimationFrame(function () {
             openCostSimulator(source);
         });
     }
 
+    function contactLawyer() {
+        var link = pendingIntentLink;
+        var href = link ? buildWhatsAppHref(link) : '';
+        closeIntentModal(false);
+
+        if (!href) {
+            return;
+        }
+
+        if (getContactCount() >= 2) {
+            openRepeatContactModal();
+            return;
+        }
+
+        recordContact(link);
+        var opened = window.open(href, '_blank', 'noopener,noreferrer');
+        if (!opened) {
+            window.location.href = href;
+        }
+    }
+
     function applyWhatsAppMessages() {
         document.querySelectorAll('a[data-conversion-source], a[href*="wa.me"]').forEach(function (link) {
-            if (isDirectQuestion(link)) {
-                link.href = buildWhatsAppHref(link);
-                return;
-            }
-
-            if (!isSimulatorWhatsApp(link)) {
-                neutralizeWhatsAppLink(link);
-                return;
-            }
-
-            var detail = (link.getAttribute('data-whatsapp-detail') || '').trim();
-
-            if (!detail) {
-                neutralizeWhatsAppLink(link);
-                return;
-            }
-
+            neutralizeWhatsAppLink(link);
             link.href = buildWhatsAppHref(link);
         });
     }
@@ -406,52 +426,11 @@
             return;
         }
 
-        if (isSimulatorWhatsApp(link)) {
-            if (isDirectQuestion(link)) {
-                link.href = buildWhatsAppHref(link);
-
-                if (hasRecordedConversion()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    openRepeatContactModal(link.href);
-                    return;
-                }
-
-                pushWhatsAppClickEvent(link);
-                recordConversion();
-                return;
-            }
-
-            var quoteIsComplete =
-                typeof window.validateCostSimulatorSend === 'function' &&
-                window.validateCostSimulatorSend(
-                    link.getAttribute('data-conversion-source')
-                ) === true;
-
-            if (!quoteIsComplete) {
-                event.preventDefault();
-                event.stopPropagation();
-                return;
-            }
-
-            link.href = buildWhatsAppHref(link);
-
-            if (hasRecordedConversion()) {
-                event.preventDefault();
-                event.stopPropagation();
-                openRepeatContactModal(link.href);
-                return;
-            }
-
-            pushWhatsAppClickEvent(link);
-            recordConversion();
-            return;
-        }
-
-        neutralizeWhatsAppLink(link);
         event.preventDefault();
         event.stopPropagation();
-        openIntentModal(link.getAttribute('data-conversion-source') || '');
+        pendingIntentLink = link;
+        pendingIntentSource = link.getAttribute('data-conversion-source') || '';
+        openIntentModal(pendingIntentSource);
     }
 
     function init() {
